@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevStudy.Domain.Interfaces;
 
-interface IAlunoRepository
+public interface IAlunoRepository
 {
     Task<IEnumerable<Aluno>> GetAlunos();
     Task<Aluno> GetAluno(int id);
