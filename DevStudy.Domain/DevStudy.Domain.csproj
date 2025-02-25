@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
+  <PropertyGroup> 
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Exceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevStudy.Core\DevStudy.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,19 @@
+using DevStudy.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore; // Add this using directive 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Configuração da conexão com o banco de dados
+var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<DataBaseContext>(options =>
+    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection))); // Fix the error
 
 var app = builder.Build();
 

@@ -16,4 +16,32 @@ public class DataBaseContext : DbContext
     public DbSet<Pagamento> Pagamentos { get; set; }
     public DbSet<Instrutor> Instrutores { get; set; }
     public DbSet<AvaliacaoFisica> AvaliacoesFisicas { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Configuração do modelo "Plano"
+        modelBuilder.Entity<Plano>(entity =>
+        {
+            // Chave primária
+            entity.HasKey(p => p.Id);
+
+            // Configuração da propriedade "Nome"
+            entity.Property(p => p.Nome)
+                .IsRequired() // Torna o nome obrigatório
+                .HasMaxLength(100); // Define o comprimento máximo do nome
+
+            // Configuração da propriedade "Preco"
+            entity.Property(p => p.Preco)
+                .HasColumnType("decimal(18,2)") // Define o tipo como decimal com 2 casas decimais
+                .IsRequired(); // Torna o preço obrigatório
+
+            // Configuração da propriedade "Descricao"
+            entity.Property(p => p.Descricao)
+                .HasMaxLength(500); // Define o comprimento máximo da descrição
+
+            // Configuração da propriedade "DuracaoMeses"
+            entity.Property(p => p.DuracaoMeses)
+                .IsRequired(); // Torna a duração em meses obrigatória
+        });  
+    }
 }
