@@ -1,0 +1,6 @@
+@ApiRESTfullDotNet9_HostAddress = http://localhost:5001
+
+GET {{ApiRESTfullDotNet9_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
