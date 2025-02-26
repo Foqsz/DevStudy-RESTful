@@ -13,6 +13,6 @@ public interface IAlunoRepository
     Task<Aluno> GetAluno(int id);
     Task<Aluno> GetAlunoByEmail(string email);
     Task<Aluno> CreateAluno(Aluno aluno);
-    Task<Aluno> UpdateAluno(Aluno aluno);
-    Task<Aluno> DeleteAluno(int id);
+    Task<Aluno> UpdateAluno(int id, Aluno aluno);
+    Task<bool> DeleteAluno(int id);
 }
