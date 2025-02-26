@@ -14,5 +14,6 @@ public class AlunoMappingProfile : Profile
     public AlunoMappingProfile()
     {
         CreateMap<AlunoDTO, Aluno>().ReverseMap();
+        CreateMap<AlunoCreateDTO, Aluno>().ReverseMap();
     } 
 }
