@@ -23,7 +23,7 @@ public class AlunoRepository : IAlunoRepository
     }
     public async Task<IEnumerable<Aluno>> GetAlunos()
     {
-        return await _context.Alunos.Order().ToListAsync();
+        return await _context.Alunos.ToListAsync();
     }
 
     public async Task<Aluno> GetAluno(int id)
@@ -38,17 +38,17 @@ public class AlunoRepository : IAlunoRepository
 
     public async Task<Aluno> CreateAluno(Aluno aluno)
     {
-        var alunoExist = await _context.Alunos.Where(a => a.Id == aluno.Id).ToListAsync();
+        var alunoExist = await _context.Alunos.AnyAsync(a => a.Id == aluno.Id);
 
-        if (alunoExist == null)
+        if (alunoExist)
         {
             _logger.LogError("Aluno já cadastrado com este ID");
             return null;
         }
 
-        var emailExist = await _context.Alunos.Where(a => a.Email == aluno.Email).ToListAsync();
+        var emailExist = await _context.Alunos.AnyAsync(a => a.Email == aluno.Email);
 
-        if (emailExist == null)
+        if (emailExist)
         {
             _logger.LogError("Email já cadastrado");
             return null;
