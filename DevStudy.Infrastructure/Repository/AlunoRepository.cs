@@ -100,6 +100,12 @@ public class AlunoRepository : IAlunoRepository
     {
         var deleteAluno = await _context.Alunos.FindAsync(id); 
 
+        if(deleteAluno == null)
+        {
+            _logger.LogError("Aluno não encontrado");
+            return false;
+        }
+
         _context.Alunos.Remove(deleteAluno);
         await _context.SaveChangesAsync();
 
