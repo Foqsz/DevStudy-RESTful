@@ -33,7 +33,7 @@ public class AlunoRepository : IAlunoRepository
 
     public async Task<Aluno> GetAlunoByEmail(string email)
     {
-        return await _context.Alunos.FirstOrDefaultAsync(a => a.Email == email);
+        return await _context.Alunos.SingleOrDefaultAsync(a => a.Email == email);
     }
 
     public async Task<Aluno> CreateAluno(Aluno aluno)
@@ -60,36 +60,42 @@ public class AlunoRepository : IAlunoRepository
     }
 
     public async Task<Aluno> UpdateAluno(int id, Aluno aluno)
-    {
+    { 
         var alunoCheck = await _context.Alunos.FindAsync(id);
         if (alunoCheck == null)
         {
-            _logger.LogError("Aluno not found");
+            _logger.LogError("Aluno não encontrado");
             return null;
         }
-
-        if(id != aluno.Id)
+         
+        if (id != aluno.Id)
         {
-            _logger.LogError("Id do aluno não corresponde");
+            _logger.LogError("ID do aluno não corresponde");
             return null;
         }
+         
+        var emailExist = await _context.Alunos
+            .Where(a => a.Email == aluno.Email && a.Id != id) // Não considerar o aluno atual
+            .AnyAsync(); // Usar AnyAsync() para verificar a existência
 
-        var emailExist = await _context.Alunos.Where(a => a.Email == aluno.Email).ToListAsync();
-
-        if (emailExist == null)
+        if (emailExist)
         {
             _logger.LogError("Email já cadastrado");
             return null;
         }
-
+         
         alunoCheck.Nome = aluno.Nome;
         alunoCheck.Email = aluno.Email;
-        alunoCheck.Senha = aluno.Senha;
-        alunoCheck.DataNascimento = aluno.DataNascimento;
-        alunoCheck.DataInscricao = aluno.DataInscricao;
+
+        // Se a senha for fornecida (não nula ou vazia), atualize a senha
+        if (!string.IsNullOrEmpty(aluno.Senha))
+        {
+            alunoCheck.Senha = aluno.Senha;
+        }
+         
         alunoCheck.Plano = aluno.Plano;
         alunoCheck.Ativo = aluno.Ativo;
-
+         
         _context.Alunos.Update(alunoCheck);
         await _context.SaveChangesAsync();
 
