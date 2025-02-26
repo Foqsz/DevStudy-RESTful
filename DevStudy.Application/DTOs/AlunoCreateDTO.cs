@@ -12,5 +12,6 @@ public class AlunoCreateDTO
     public string Email { get; set; }
     public string Senha { get; set; }  
     public DateTime DataNascimento { get; set; }
+    public bool Ativo { get; set; }
     public string Plano { get; set; }
 }
