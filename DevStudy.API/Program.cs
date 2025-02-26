@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore; // Add this using directive 
+using Microsoft.EntityFrameworkCore;
+using DevStudy.Application.Mappers.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,9 @@ builder.Services.AddControllers();
 // Configuração da conexão com o banco de dados
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataBaseContext>(options =>
-    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection))); // Fix the error
+    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));  
+
+builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
 
 var app = builder.Build();
 
