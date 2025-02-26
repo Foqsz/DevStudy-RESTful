@@ -88,8 +88,8 @@ namespace DevStudy.API.Controller
             try
             { 
                 var newAluno = await _alunoService.AddAluno(aluno);
-                var alunoDTO = _mapper.Map<AlunoCreateDTO>(newAluno);
-                return CreatedAtAction(nameof(GetAluno), new { id = alunoDTO.Nome }, alunoDTO);
+                var alunoDTO = _mapper.Map<AlunoCreateDTO, Aluno>(newAluno);
+                return CreatedAtAction(nameof(GetAluno), new { id = alunoDTO.Id }, alunoDTO);
             }
             catch (Exception ex)
             {
@@ -98,8 +98,8 @@ namespace DevStudy.API.Controller
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<AlunoDTO>> UpdateAluno(int id, [FromBody] Aluno aluno)
+        [HttpPatch("{id:int}")]
+        public async Task<ActionResult<AlunoUpdateDTO>> UpdateAluno(int id, [FromBody] AlunoUpdateDTO aluno)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace DevStudy.API.Controller
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<AlunoDTO>> DeleteAluno(int id)
         {
             try
