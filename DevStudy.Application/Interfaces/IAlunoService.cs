@@ -14,6 +14,6 @@ public interface IAlunoService
     Task<AlunoDTO> GetAluno(int id);
     Task<AlunoDTO> GetAlunoByEmail(string email);
     Task<AlunoCreateDTO> AddAluno(AlunoCreateDTO aluno);
-    Task<Aluno> UpdateAluno(int id, Aluno aluno);
+    Task<AlunoUpdateDTO> UpdateAluno(int id, AlunoUpdateDTO aluno);
     Task<bool> DeleteAluno(int id);
 }

@@ -73,11 +73,15 @@ namespace DevStudy.Application.Services
             return _mapper.Map<AlunoCreateDTO>(addAluno);
         }
 
-        public async Task<Aluno> UpdateAluno(int id, Aluno aluno)
+        public async Task<AlunoUpdateDTO> UpdateAluno(int id, AlunoUpdateDTO aluno)
         {
-            var updateAluno = await _alunoRepository.UpdateAluno(id, aluno);
+            var mapperAluno = _mapper.Map<AlunoUpdateDTO, Aluno>(aluno);
 
-            return aluno;
+            var updateAluno = await _alunoRepository.UpdateAluno(id, mapperAluno);
+
+            var updatedAlunoDTO = _mapper.Map<Aluno, AlunoUpdateDTO>(updateAluno);
+
+            return updatedAlunoDTO;
         }
 
         public async Task<bool> DeleteAluno(int id)
