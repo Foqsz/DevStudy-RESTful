@@ -29,7 +29,7 @@ namespace DevStudy.Application.Services
         {
             var alunosAll = await _alunoRepository.GetAlunos();
             
-            if (alunosAll == null || alunosAll.Any())
+            if (!alunosAll.Any())
             {
                 _logger.LogError("Não há alunos cadastrados");
                 return null;
@@ -84,7 +84,7 @@ namespace DevStudy.Application.Services
         {
             var deleteAluno = await _alunoRepository.DeleteAluno(id);
 
-            if(deleteAluno == null)
+            if(deleteAluno == false)
             {
                 _logger.LogError("Aluno não encontrado");
                 return false;
