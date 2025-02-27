@@ -19,5 +19,6 @@ public class Treino
     public DateTime Data { get; set; } // Data do treino
 
     [Required]
-    public List<TreinoExercicio> Exercicios { get; set; } // Relacionamento N:M entre Treino e Exercicio
+    public List<TreinoExercicio> Exercicios { get; set; } = new();// Relacionamento N:M entre Treino e Exercicio
+    public Aluno Aluno { get; set; }
 }
