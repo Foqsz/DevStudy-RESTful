@@ -1,4 +1,5 @@
-﻿using DevStudy.Core.Models;
+﻿using DevStudy.Application.DTOs.Treino;
+using DevStudy.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,5 @@ public class AlunoDTO
     public string Email { get; set; }
     public string Plano { get; set; }
     public bool Ativo { get; set; }
-    public List<Treino> Treinos { get; set; } // Relacionamento com Treinos
+    public List<TreinoDTO> Treinos { get; set; } // Relacionamento com Treinos
 }
