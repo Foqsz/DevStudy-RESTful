@@ -25,9 +25,14 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));  
 
 builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(TreinoMappingProfile).Assembly);
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
+
+builder.Services.AddScoped<ITreinosRepository, TreinosRepository>();
+builder.Services.AddScoped<ITreinosService, TreinosService>();
+
 
 var app = builder.Build();
 
