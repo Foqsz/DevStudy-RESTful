@@ -1,4 +1,4 @@
-﻿using DevStudy.Application.DTOs;
+﻿using DevStudy.Application.DTOs.Aluno;
 using DevStudy.Core.Models;
 using System;
 using System.Collections.Generic;
