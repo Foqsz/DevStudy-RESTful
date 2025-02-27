@@ -26,7 +26,6 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoMappingProfile).Assembly);
-builder.Services.AddAutoMapper(typeof(ExerciciosMappingProfile).Assembly);
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
