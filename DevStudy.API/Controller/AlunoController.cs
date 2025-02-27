@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DevStudy.Application.DTOs;
+using DevStudy.Application.DTOs.Aluno;
 using DevStudy.Application.Interfaces;
 using DevStudy.Core.Models;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +23,7 @@ namespace DevStudy.API.Controller
         }
 
         [HttpGet]
-        public async Task<ActionResult<AlunoDTO>> GetAlunos()
+        public async Task<ActionResult<IEnumerable<AlunoDTO>>> GetAlunos()
         {
             try
             {
