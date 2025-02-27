@@ -23,7 +23,9 @@ public class AlunoRepository : IAlunoRepository
     }
     public async Task<IEnumerable<Aluno>> GetAlunos()
     {
-        return await _context.Alunos.ToListAsync();
+        return await _context.Alunos
+                             .Include(a => a.Treinos) // Carrega a lista de treinos de cada aluno
+                             .ToListAsync();
     }
 
     public async Task<Aluno> GetAluno(int id)
