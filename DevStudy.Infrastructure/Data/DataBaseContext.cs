@@ -1,5 +1,5 @@
 ﻿using DevStudy.Core.Models;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 
 namespace DevStudy.Infrastructure.Data;
 
@@ -42,6 +42,11 @@ public class DataBaseContext : DbContext
             // Configuração da propriedade "DuracaoMeses"
             entity.Property(p => p.DuracaoMeses)
                 .IsRequired(); // Torna a duração em meses obrigatória
-        });  
+        });
+
+        modelBuilder.Entity<Treino>()
+        .HasOne(t => t.Aluno)
+        .WithMany(a => a.Treinos)
+        .HasForeignKey(t => t.AlunoId);
     }
 }
