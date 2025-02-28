@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevStudy.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,5 @@ public class TreinoDTO
 {
     public int Id { get; set; }
     public DateTime Data { get; set; }
-    public List<ExerciciosDTO> Exercicios { get; set; } // Lista de exercícios do treino 
-
+    public List<Exercicio> Exercicios { get; set; } // Lista de exercícios do treino 
 }
