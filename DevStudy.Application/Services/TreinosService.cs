@@ -18,15 +18,16 @@ public class TreinosService : ITreinosService
     private ILogger<TreinosService> _logger;
     private IMapper _mapper;
 
-    public TreinosService(ITreinosRepository treinos, ILogger<TreinosService> logger)
+    public TreinosService(ITreinosRepository treinos, ILogger<TreinosService> logger, IMapper mapper)
     {
         _treinos = treinos;
         _logger = logger;
-    } 
+        _mapper = mapper;
+    }
     public async Task<IEnumerable<TreinoDTO>> GetTreinos()
     {
         var treinos = await _treinos.GetTreinos();
-        
+
         if (!treinos.Any())
         {
             _logger.LogError("Nenhum treino encontrado");
@@ -34,13 +35,13 @@ public class TreinosService : ITreinosService
         }
 
         return _mapper.Map<IEnumerable<TreinoDTO>>(treinos);
-    } 
+    }
 
     public async Task<TreinoDTO> GetTreinoById(int id)
     {
         var treinoId = await _treinos.GetTreinoById(id);
 
-        if(treinoId == null)
+        if (treinoId == null)
         {
             _logger.LogError("Treino não encontrado");
             return null;
@@ -51,7 +52,7 @@ public class TreinosService : ITreinosService
 
     public async Task<TreinoCreateDTO> CreateTreino(TreinoCreateDTO treino)
     {
-       var treinoMapper = _mapper.Map<TreinoCreateDTO, Treino>(treino);
+        var treinoMapper = _mapper.Map<TreinoCreateDTO, Treino>(treino);
         var newTreino = await _treinos.CreateTreino(treinoMapper);
 
         if (newTreino == null)
@@ -78,13 +79,13 @@ public class TreinosService : ITreinosService
     public async Task<bool> DeleteTreino(int id)
     {
         var deleteTreino = await _treinos.DeleteTreino(id);
-        
-        if(deleteTreino == false)
+
+        if (deleteTreino == false)
         {
             _logger.LogError("Treino não deletado");
             return false;
         }
 
         return true;
-    }   
+    }
 }
