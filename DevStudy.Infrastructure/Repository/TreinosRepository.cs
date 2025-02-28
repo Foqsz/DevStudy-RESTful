@@ -1,4 +1,6 @@
-﻿using DevStudy.Core.Models;
+﻿using AutoMapper;
+using DevStudy.Application.DTOs.Treino;
+using DevStudy.Core.Models;
 using DevStudy.Domain.Interfaces;
 using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ namespace DevStudy.Infrastructure.Repository
     {
         private readonly DataBaseContext _context;
         private ILogger<TreinosRepository> _logger;
+        private IMapper _mapper;
 
         public TreinosRepository(DataBaseContext context, ILogger<TreinosRepository> logger)
         {
@@ -24,8 +27,13 @@ namespace DevStudy.Infrastructure.Repository
 
         public async Task<IEnumerable<Treino>> GetTreinos()
         {
-            return await _context.Treinos.Include(t => t.Aluno).ToListAsync();
+            return await _context.Treinos
+                .Include(t => t.Aluno)
+                .Include(t => t.Exercicios)
+                    .ThenInclude(te => te.Exercicio) // Inclui os exercícios reais 
+                .ToListAsync();
         }
+
 
         public async Task<Treino> GetTreinoById(int id)
         {
@@ -35,15 +43,26 @@ namespace DevStudy.Infrastructure.Repository
         public async Task<Treino> CreateTreino(Treino treino)
         {
             var aluno = await _context.Alunos.FindAsync(treino.AlunoId);
-            if (aluno == null)
+            if (aluno != null)
+            {
+                var exercicioExist = await _context.Exercicios.AnyAsync(x => x.Id == treino.ExercicioId);
+                if (exercicioExist)
+                {
+                    _logger.LogInformation("Treino criado com sucesso");
+                    _context.Treinos.Add(treino);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    _logger.LogError("Exercicio não encontrado");
+                    return null;
+                }
+            }
+            else
             {
                 _logger.LogError("Aluno não encontrado");
                 return null;
             }
-
-            _context.Treinos.Add(treino);
-            await _context.SaveChangesAsync();
-
             return treino;
         }
 
@@ -66,7 +85,7 @@ namespace DevStudy.Infrastructure.Repository
         {
             var treino = await _context.Treinos.FindAsync(id);
 
-            if(treino == null)
+            if (treino == null)
             {
                 _logger.LogError("Treino não encontrado");
                 return false;
