@@ -13,7 +13,7 @@ public class TreinoMappingProfile : Profile
 {
     public TreinoMappingProfile()
     {
-        CreateMap<TreinoDTO, Treino>().ReverseMap();
+        CreateMap<TreinoDTO, Treino>().ReverseMap().ForMember(dest => dest.Exercicios, opt => opt.MapFrom(src => src.Exercicios.Select(te => te.Exercicio))); 
         CreateMap<TreinoCreateDTO, Treino>().ReverseMap();
     }
 }
