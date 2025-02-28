@@ -14,6 +14,8 @@ public class Treino
 
     [Required]
     public int AlunoId { get; set; } // Relacionamento com Aluno
+    [Required]
+    public int ExercicioId { get; set; } // Relacionamento com Exercicio
 
     [Required]
     public DateTime Data { get; set; } // Data do treino

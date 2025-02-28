@@ -23,4 +23,5 @@ public class TreinoExercicio
 
     [Range(1, int.MaxValue, ErrorMessage = "Series must be greater than 0")]
     public int Series { get; set; } // Quantidade de séries
+    public Exercicio Exercicio { get; set; }
 }
