@@ -17,15 +17,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(); 
+builder.Services.AddSwaggerGen();
 
 // Configuração da conexão com o banco de dados
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataBaseContext>(options =>
-    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));  
+    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(TreinoExercicioMappingProfile).Assembly);
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
@@ -36,12 +37,15 @@ builder.Services.AddScoped<ITreinosService, TreinosService>();
 builder.Services.AddScoped<IExerciciosRepository, ExerciciosRepository>();
 builder.Services.AddScoped<IExerciciosService, ExerciciosService>();
 
+builder.Services.AddScoped<ITreinoExercicioRepository, TreinoExercicioRepository>();
+builder.Services.AddScoped<ITreinoExercicioService, TreinoExercicioService>();
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{ 
+{
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
