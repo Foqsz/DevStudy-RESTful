@@ -4,6 +4,7 @@ using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevStudy.Infrastructure.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250228134744_updateDbv2")]
+    partial class updateDbv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,12 +127,7 @@ namespace DevStudy.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("TreinoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TreinoId");
 
                     b.ToTable("Exercicios");
                 });
@@ -275,8 +273,6 @@ namespace DevStudy.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExercicioId");
-
                     b.HasIndex("TreinoId");
 
                     b.ToTable("TreinoExercicios");
@@ -300,13 +296,6 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Aluno");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Exercicio", b =>
-                {
-                    b.HasOne("DevStudy.Core.Models.Treino", null)
-                        .WithMany("ExerciciosAluno")
-                        .HasForeignKey("TreinoId");
-                });
-
             modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
                 {
                     b.HasOne("DevStudy.Core.Models.Aluno", "Aluno")
@@ -320,19 +309,11 @@ namespace DevStudy.Infrastructure.Migrations
 
             modelBuilder.Entity("DevStudy.Core.Models.TreinoExercicio", b =>
                 {
-                    b.HasOne("DevStudy.Core.Models.Exercicio", "Exercicio")
-                        .WithMany()
-                        .HasForeignKey("ExercicioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DevStudy.Core.Models.Treino", null)
                         .WithMany("Exercicios")
                         .HasForeignKey("TreinoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exercicio");
                 });
 
             modelBuilder.Entity("DevStudy.Core.Models.Aluno", b =>
@@ -348,8 +329,6 @@ namespace DevStudy.Infrastructure.Migrations
             modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
                 {
                     b.Navigation("Exercicios");
-
-                    b.Navigation("ExerciciosAluno");
                 });
 #pragma warning restore 612, 618
         }

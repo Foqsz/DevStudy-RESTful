@@ -4,6 +4,7 @@ using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevStudy.Infrastructure.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250228143308_updateDbv4")]
+    partial class updateDbv4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,6 +112,9 @@ namespace DevStudy.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AlunoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -124,12 +130,9 @@ namespace DevStudy.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("TreinoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TreinoId");
+                    b.HasIndex("AlunoId");
 
                     b.ToTable("Exercicios");
                 });
@@ -302,9 +305,9 @@ namespace DevStudy.Infrastructure.Migrations
 
             modelBuilder.Entity("DevStudy.Core.Models.Exercicio", b =>
                 {
-                    b.HasOne("DevStudy.Core.Models.Treino", null)
-                        .WithMany("ExerciciosAluno")
-                        .HasForeignKey("TreinoId");
+                    b.HasOne("DevStudy.Core.Models.Aluno", null)
+                        .WithMany("Exercicios")
+                        .HasForeignKey("AlunoId");
                 });
 
             modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
@@ -337,6 +340,8 @@ namespace DevStudy.Infrastructure.Migrations
 
             modelBuilder.Entity("DevStudy.Core.Models.Aluno", b =>
                 {
+                    b.Navigation("Exercicios");
+
                     b.Navigation("Treinos");
                 });
 
@@ -348,8 +353,6 @@ namespace DevStudy.Infrastructure.Migrations
             modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
                 {
                     b.Navigation("Exercicios");
-
-                    b.Navigation("ExerciciosAluno");
                 });
 #pragma warning restore 612, 618
         }
