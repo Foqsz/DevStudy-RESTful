@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DevStudy.Domain.Models;
 using DevStudy.Domain.Interfaces;
+using DevStudy.Domain.Models;
 using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ public class AlunoRepository : IAlunoRepository
     public async Task<IEnumerable<Aluno>> GetAlunos()
     {
         return await _context.Alunos
+                             .OrderBy(a => a.Nome)
                              .Include(a => a.Treinos) // Carrega a lista de treinos de cada aluno  
                              .ToListAsync();
     }
