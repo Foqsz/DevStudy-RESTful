@@ -13,6 +13,6 @@ public interface ITreinosService
     Task<IEnumerable<TreinoDTO>> GetTreinos();
     Task<TreinoDTO> GetTreinoById(int id);
     Task<TreinoCreateDTO> CreateTreino(TreinoCreateDTO treino);
-    Task<Treino> UpdateTreino(int id, Treino treino);
+    Task<TreinoCreateDTO> UpdateTreino(int id, TreinoCreateDTO treino);
     Task<bool> DeleteTreino(int id);
 }
