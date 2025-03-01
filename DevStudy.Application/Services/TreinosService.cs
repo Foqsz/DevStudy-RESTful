@@ -64,9 +64,10 @@ public class TreinosService : ITreinosService
         return _mapper.Map<TreinoCreateDTO>(newTreino);
     }
 
-    public async Task<Treino> UpdateTreino(int id, Treino treino)
+    public async Task<TreinoCreateDTO> UpdateTreino(int id, TreinoCreateDTO treino)
     {
-        var updateTreino = _treinos.UpdateTreino(id, treino);
+        var treinoMapper = _mapper.Map<TreinoCreateDTO, Treino>(treino);
+        var updateTreino = await _treinos.UpdateTreino(id, treinoMapper);
 
         if (updateTreino == null)
         {
