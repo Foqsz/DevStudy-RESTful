@@ -60,7 +60,7 @@ namespace DevStudy.API.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<TreinoCreateDTO>> CreateTreino(TreinoCreateDTO treino)
+        public async Task<ActionResult<TreinoCreateDTO>> CreateTreino([FromBody] TreinoCreateDTO treino)
         {
             try
             {
@@ -77,6 +77,30 @@ namespace DevStudy.API.Controller
                 _logger.LogError(ex, "Erro ao criar treino");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar treino");
             }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<TreinoCreateDTO>> UpdateTreino(int id, [FromBody] TreinoCreateDTO treinoDto)
+        {
+            var treinoUpdate = await _treinosService.UpdateTreino(id, treinoDto);
+
+            if (id != treinoDto.AlunoId)
+            {
+                return BadRequest("Id do treino não corresponde ao id do aluno");
+            }
+            return Ok(treinoUpdate);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<bool>> DeleteTreino(int id)
+        {
+            var treinoDelete = await _treinosService.DeleteTreino(id);
+            if (!treinoDelete)
+            {
+                _logger.LogError("Treino não deletado");
+                return NotFound();
+            }
+            return Ok(treinoDelete);
         }
     }
 }
