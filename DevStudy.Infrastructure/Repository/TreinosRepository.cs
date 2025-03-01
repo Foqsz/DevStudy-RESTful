@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DevStudy.Application.DTOs.Treino;
-using DevStudy.Core.Models;
+using DevStudy.Domain.Models;
 using DevStudy.Domain.Interfaces;
 using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

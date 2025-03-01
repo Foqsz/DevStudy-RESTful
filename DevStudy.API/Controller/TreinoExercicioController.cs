@@ -1,6 +1,6 @@
 ﻿using DevStudy.Application.DTOs.TreinoExercicio;
-using DevStudy.Application.Interfaces;
-using DevStudy.Core.Models;
+using DevStudy.Application.Interfaces; 
+using DevStudy.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

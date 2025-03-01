@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DevStudy.Core.Models;
+using DevStudy.Domain.Models;
 using DevStudy.Domain.Interfaces;
 using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +24,7 @@ public class AlunoRepository : IAlunoRepository
     public async Task<IEnumerable<Aluno>> GetAlunos()
     {
         return await _context.Alunos
-                             .Include(a => a.Treinos) // Carrega a lista de treinos de cada aluno
+                             .Include(a => a.Treinos) // Carrega a lista de treinos de cada aluno  
                              .ToListAsync();
     }
 

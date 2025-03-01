@@ -1,4 +1,4 @@
-﻿using DevStudy.Core.Models;
+﻿using DevStudy.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

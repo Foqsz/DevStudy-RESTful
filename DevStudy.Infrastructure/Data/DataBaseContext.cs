@@ -1,4 +1,4 @@
-﻿using DevStudy.Core.Models;
+﻿using DevStudy.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DevStudy.Infrastructure.Data;

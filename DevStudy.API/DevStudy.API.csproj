@@ -16,8 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\DevStudy.Application\DevStudy.Application.csproj" />
-		<ProjectReference Include="..\DevStudy.Core\DevStudy.Core.csproj" />
+		<ProjectReference Include="..\DevStudy.Application\DevStudy.Application.csproj" /> 
 		<ProjectReference Include="..\DevStudy.Domain\DevStudy.Domain.csproj" />
 		<ProjectReference Include="..\DevStudy.Infrastructure\DevStudy.Infrastructure.csproj" />
 	</ItemGroup>

@@ -25,7 +25,7 @@ namespace DevStudy.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("DevStudy.Core.Models.Aluno", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Aluno", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Alunos");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.AvaliacaoFisica", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.AvaliacaoFisica", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("AvaliacoesFisicas");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Exercicio", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Exercicio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +132,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Exercicios");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Instrutor", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Instrutor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Instrutores");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Pagamento", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Pagamento", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,7 +198,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Pagamentos");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Plano", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Plano", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,7 +227,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Planos");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -251,7 +251,7 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Treinos");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.TreinoExercicio", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.TreinoExercicio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -278,16 +278,16 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("TreinoExercicios");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Aluno", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Aluno", b =>
                 {
-                    b.HasOne("DevStudy.Core.Models.Instrutor", null)
+                    b.HasOne("DevStudy.Domain.Models.Instrutor", null)
                         .WithMany("Alunos")
                         .HasForeignKey("InstrutorId");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.AvaliacaoFisica", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.AvaliacaoFisica", b =>
                 {
-                    b.HasOne("DevStudy.Core.Models.Aluno", "Aluno")
+                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
                         .WithMany()
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -296,9 +296,9 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Aluno");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>
                 {
-                    b.HasOne("DevStudy.Core.Models.Aluno", "Aluno")
+                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
                         .WithMany("Treinos")
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -307,26 +307,26 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Aluno");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.TreinoExercicio", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.TreinoExercicio", b =>
                 {
-                    b.HasOne("DevStudy.Core.Models.Treino", null)
+                    b.HasOne("DevStudy.Domain.Models.Treino", null)
                         .WithMany("Exercicios")
                         .HasForeignKey("TreinoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Aluno", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Aluno", b =>
                 {
                     b.Navigation("Treinos");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Instrutor", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Instrutor", b =>
                 {
                     b.Navigation("Alunos");
                 });
 
-            modelBuilder.Entity("DevStudy.Core.Models.Treino", b =>
+            modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>
                 {
                     b.Navigation("Exercicios");
                 });

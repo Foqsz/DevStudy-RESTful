@@ -1,7 +1,7 @@
-﻿using DevStudy.Application.Interfaces;
-using DevStudy.Core.Models;
+﻿using DevStudy.Application.Interfaces;  
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DevStudy.Domain.Models;
 
 namespace DevStudy.API.Controller
 {

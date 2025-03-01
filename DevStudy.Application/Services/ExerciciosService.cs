@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DevStudy.Application.Interfaces;
-using DevStudy.Core.Models;
+using DevStudy.Domain.Models;
 using DevStudy.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;

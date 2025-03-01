@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevStudy.Core.Models;
+namespace DevStudy.Domain.Models;
 
 public class Exercicio
 {

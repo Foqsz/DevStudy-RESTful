@@ -16,8 +16,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();  
+builder.Services.AddSwaggerGen(doc =>
+{
+    doc.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "DevStudy.API",
+        Version = "v1",
+        License = new Microsoft.OpenApi.Models.OpenApiLicense
+        {
+            Name = "Foqsz",
+            Url = new System.Uri("https://github.com/Foqsz")
+        }
+    });
+});
 
 // Configuração da conexão com o banco de dados
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");

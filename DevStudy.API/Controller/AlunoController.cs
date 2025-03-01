@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DevStudy.Application.DTOs.Aluno;
 using DevStudy.Application.Interfaces;
-using DevStudy.Core.Models;
+using DevStudy.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

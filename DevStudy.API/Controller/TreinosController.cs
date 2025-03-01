@@ -1,6 +1,6 @@
 ﻿using DevStudy.Application.DTOs.Treino;
 using DevStudy.Application.Interfaces;
-using DevStudy.Core.Models;
+using DevStudy.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,14 @@ namespace DevStudy.API.Controller
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get all treinos
+        /// </summary>
+        /// <returns>List of TreinoDTO</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<TreinoDTO>>> GetTreinos()
         {
             try
@@ -39,7 +46,15 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Get treino by id
+        /// </summary>
+        /// <param name="id">Treino id</param>
+        /// <returns>TreinoDTO</returns>
         [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoDTO>> GetTreinoById(int id)
         {
             try
@@ -59,7 +74,15 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Create a new treino
+        /// </summary>
+        /// <param name="treino">TreinoCreateDTO</param>
+        /// <returns>Created TreinoCreateDTO</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoCreateDTO>> CreateTreino([FromBody] TreinoCreateDTO treino)
         {
             try
@@ -79,7 +102,16 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Update an existing treino
+        /// </summary>
+        /// <param name="id">Treino id</param>
+        /// <param name="treinoDto">TreinoCreateDTO</param>
+        /// <returns>Updated TreinoCreateDTO</returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoCreateDTO>> UpdateTreino(int id, [FromBody] TreinoCreateDTO treinoDto)
         {
             var treinoUpdate = await _treinosService.UpdateTreino(id, treinoDto);
@@ -91,7 +123,15 @@ namespace DevStudy.API.Controller
             return Ok(treinoUpdate);
         }
 
+        /// <summary>
+        /// Delete a treino by id
+        /// </summary>
+        /// <param name="id">Treino id</param>
+        /// <returns>Boolean indicating success</returns>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<bool>> DeleteTreino(int id)
         {
             var treinoDelete = await _treinosService.DeleteTreino(id);

@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DevStudy.Core\DevStudy.Core.csproj" />
     <ProjectReference Include="..\DevStudy.Domain\DevStudy.Domain.csproj" />
   </ItemGroup>
 
