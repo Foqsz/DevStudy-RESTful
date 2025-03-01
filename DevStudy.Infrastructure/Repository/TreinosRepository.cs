@@ -19,10 +19,11 @@ namespace DevStudy.Infrastructure.Repository
         private ILogger<TreinosRepository> _logger;
         private IMapper _mapper;
 
-        public TreinosRepository(DataBaseContext context, ILogger<TreinosRepository> logger)
+        public TreinosRepository(DataBaseContext context, ILogger<TreinosRepository> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<Treino>> GetTreinos()
@@ -37,7 +38,7 @@ namespace DevStudy.Infrastructure.Repository
 
         public async Task<Treino> GetTreinoById(int id)
         {
-            return await _context.Treinos.Include(t => t.Aluno).Include(t => t.Exercicios).FirstOrDefaultAsync(t => t.Id == id);
+            return await _context.Treinos.Include(t => t.Aluno).Include(t => t.Exercicios).ThenInclude(te => te.Exercicio).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<Treino> CreateTreino(Treino treino)
