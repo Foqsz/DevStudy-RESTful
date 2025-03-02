@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DevStudy.Domain.Models;
-using DevStudy.Domain.Interfaces;
-using DevStudy.Domain.Models;
+using DevStudy.Domain.Interfaces; 
 using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -26,9 +25,12 @@ public class AlunoRepository : IAlunoRepository
     {
         return await _context.Alunos
                              .OrderBy(a => a.Nome)
-                             .Include(a => a.Treinos) // Carrega a lista de treinos de cada aluno  
+                             .Include(a => a.Treinos)  // Carrega os treinos
+                                 .ThenInclude(t => t.Exercicios)  // Carrega os exercícios dentro de cada treino através da tabela TreinoExercicio
+                             .ThenInclude(te => te.Exercicio)  // Carrega o Exercicio associado ao TreinoExercicio
                              .ToListAsync();
     }
+
 
     public async Task<Aluno> GetAluno(int id)
     {
