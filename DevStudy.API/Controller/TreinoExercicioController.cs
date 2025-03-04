@@ -19,7 +19,17 @@ namespace DevStudy.API.Controller
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get all TreinoExercicios
+        /// </summary>
+        /// <returns>List of TreinoExercicios</returns>
+        /// <response code="200">Returns the list of TreinoExercicios</response>
+        /// <response code="404">If no TreinoExercicios are found</response>
+        /// <response code="500">If there is an internal server error</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<TreinoExercicio>>> GetTreinoExercicios()
         {
             try
@@ -38,7 +48,18 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Get a specific TreinoExercicio by ID
+        /// </summary>
+        /// <param name="id">TreinoExercicio ID</param>
+        /// <returns>TreinoExercicio</returns>
+        /// <response code="200">Returns the TreinoExercicio</response>
+        /// <response code="404">If the TreinoExercicio is not found</response>
+        /// <response code="500">If there is an internal server error</response>
         [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoExercicio>> GetTreinoExercicioById(int id)
         {
             try
@@ -58,13 +79,22 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Create a new TreinoExercicio
+        /// </summary>
+        /// <param name="treinoExercicio">TreinoExercicio to create</param>
+        /// <returns>Created TreinoExercicio</returns>
+        /// <response code="201">Returns the newly created TreinoExercicio</response>
+        /// <response code="500">If there is an internal server error</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoExercicioCreateDTO>> CreateTreinoExercicio([FromBody] TreinoExercicioCreateDTO treinoExercicio)
         {
             try
             {
                 var createTreinoExercicio = await _treinoExercicioService.CreateTreinoExercicio(treinoExercicio);
-                return Created();
+                return CreatedAtAction(nameof(GetTreinoExercicioById), new { id = createTreinoExercicio.Id }, createTreinoExercicio);
             }
             catch (Exception ex)
             {
@@ -73,7 +103,21 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Update an existing TreinoExercicio
+        /// </summary>
+        /// <param name="id">TreinoExercicio ID</param>
+        /// <param name="treinoExercicio">Updated TreinoExercicio</param>
+        /// <returns>Updated TreinoExercicio</returns>
+        /// <response code="200">Returns the updated TreinoExercicio</response>
+        /// <response code="400">If the ID does not match the TreinoExercicio ID</response>
+        /// <response code="404">If the TreinoExercicio is not found</response>
+        /// <response code="500">If there is an internal server error</response>
         [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoExercicio>> UpdateTreinoExercicio(int id, [FromBody] TreinoExercicio treinoExercicio)
         {
             try
@@ -96,7 +140,18 @@ namespace DevStudy.API.Controller
             }
         }
 
+        /// <summary>
+        /// Delete a specific TreinoExercicio by ID
+        /// </summary>
+        /// <param name="id">TreinoExercicio ID</param>
+        /// <returns>Deleted TreinoExercicio</returns>
+        /// <response code="200">Returns the deleted TreinoExercicio</response>
+        /// <response code="404">If the TreinoExercicio is not found</response>
+        /// <response code="500">If there is an internal server error</response>
         [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TreinoExercicio>> DeleteTreinoExercicio(int id)
         {
             try
