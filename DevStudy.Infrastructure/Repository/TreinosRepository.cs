@@ -49,6 +49,13 @@ namespace DevStudy.Infrastructure.Repository
                 var exercicioExist = await _context.Exercicios.AnyAsync(x => x.Id == treino.ExercicioId);
                 if (exercicioExist)
                 {
+                    var treinoExist = await _context.Treinos.AnyAsync(t => t.AlunoId == treino.AlunoId && t.ExercicioId == treino.ExercicioId);
+                    if (treinoExist)
+                    {
+                        _logger.LogError("O aluno já possui este treino");
+                        return null;
+                    }
+
                     _logger.LogInformation("Treino criado com sucesso");
                     _context.Treinos.Add(treino);
                     await _context.SaveChangesAsync();

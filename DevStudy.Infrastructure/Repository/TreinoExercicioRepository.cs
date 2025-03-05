@@ -44,9 +44,21 @@ public class TreinoExercicioRepository : ITreinoExercicioRepository
             var exercicioExist = await _context.Exercicios.AnyAsync(x => x.Id == treinoExercicio.ExercicioId);
             if (exercicioExist)
             {
-                _context.TreinoExercicios.Add(treinoExercicio);
-                _context.SaveChanges();
-                _logger.LogInformation("TreinoExercicio criado com sucesso");
+                var existingTreinoExercicio = await _context.TreinoExercicios
+                    .AnyAsync(te => te.TreinoId == treinoExercicio.TreinoId && te.ExercicioId == treinoExercicio.ExercicioId);
+
+                if (!existingTreinoExercicio)
+                {
+                    _context.TreinoExercicios.Add(treinoExercicio);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("TreinoExercicio criado com sucesso");
+                    return treinoExercicio;
+                }
+                else
+                {
+                    _logger.LogWarning("TreinoExercicio já existe");
+                    return null;
+                }
             }
             else
             {
@@ -56,6 +68,7 @@ public class TreinoExercicioRepository : ITreinoExercicioRepository
         }
         return null;
     }
+
 
     public async Task<TreinoExercicio> UpdateTreinoExercicio(int id, TreinoExercicio treinoExercicio)
     {
