@@ -24,7 +24,6 @@ public class AlunoRepository : IAlunoRepository
     public async Task<IEnumerable<Aluno>> GetAlunos()
     {
         return await _context.Alunos
-                             .OrderBy(a => a.Nome)
                              .Include(a => a.Treinos)  // Carrega os treinos
                                  .ThenInclude(t => t.Exercicios)  // Carrega os exercícios dentro de cada treino através da tabela TreinoExercicio
                              .ThenInclude(te => te.Exercicio)  // Carrega o Exercicio associado ao TreinoExercicio
