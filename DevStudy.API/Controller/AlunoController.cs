@@ -101,7 +101,7 @@ public class AlunoController : ControllerBase
             if (alunoEmail == null)
             {
                 _logger.LogError("Aluno não encontrado");
-                return NotFound();
+                return NotFound($"Aluno com email {email} não localizado.");
             }
             return Ok(alunoEmail);
         }
