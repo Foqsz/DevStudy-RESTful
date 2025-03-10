@@ -42,6 +42,7 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoExercicioMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(InstrutorMappingProfile).Assembly);
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
@@ -55,6 +56,8 @@ builder.Services.AddScoped<IExerciciosService, ExerciciosService>();
 builder.Services.AddScoped<ITreinoExercicioRepository, TreinoExercicioRepository>();
 builder.Services.AddScoped<ITreinoExercicioService, TreinoExercicioService>();
 
+builder.Services.AddScoped<IInstrutorRepository, InstrutorRepository>();
+builder.Services.AddScoped<IInstrutorService, InstrutorService>();
 
 var app = builder.Build();
 
