@@ -10,11 +10,14 @@ using DevStudy.Application.Interfaces;
 using DevStudy.Infrastructure.Repository;
 using DevStudy.Application.Services;
 using Microsoft.Extensions.Options;
+using DevStudy.API.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers(c =>
+    c.Filters.Add<ExceptionFilters>()
+);
 
 builder.Services.AddEndpointsApiExplorer();  
 builder.Services.AddSwaggerGen(doc =>
