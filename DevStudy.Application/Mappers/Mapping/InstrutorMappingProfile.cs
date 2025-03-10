@@ -13,7 +13,7 @@ namespace DevStudy.Application.Mappers.Mapping
     {
         public InstrutorMappingProfile()
         {
-            CreateMap<Instrutor, InstrutorUpdateDTO>().ReverseMap();
+            CreateMap<InstrutorDTO, Instrutor>().ReverseMap();
         }
     }
 }
