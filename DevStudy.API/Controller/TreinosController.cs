@@ -35,7 +35,7 @@ namespace DevStudy.API.Controller
                 if (!treinosAll.Any())
                 {
                     _logger.LogError("Nenhum treino encontrado");
-                    return NotFound();
+                    return NotFound("Nenhum treino foi encontrado.");
                 }
                 return Ok(treinosAll);
             }
@@ -63,7 +63,7 @@ namespace DevStudy.API.Controller
                 if (treinoId == null)
                 {
                     _logger.LogError("Treino não encontrado");
-                    return NotFound();
+                    return NotFound($"Treino id={id} não foi localizado.");
                 }
                 return Ok(treinoId);
             }
@@ -91,7 +91,7 @@ namespace DevStudy.API.Controller
                 if (newTreino == null)
                 {
                     _logger.LogError("Treino não criado");
-                    return NotFound();
+                    return NotFound("Falha ao criar o treino.");
                 }
                 return Ok(newTreino);
             }
@@ -138,7 +138,7 @@ namespace DevStudy.API.Controller
             if (!treinoDelete)
             {
                 _logger.LogError("Treino não deletado");
-                return NotFound();
+                return NotFound($"Treino id={id} não encontrado.");
             }
             return Ok(treinoDelete);
         }
