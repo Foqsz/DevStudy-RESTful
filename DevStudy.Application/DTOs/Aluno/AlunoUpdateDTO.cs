@@ -12,5 +12,6 @@ public class AlunoUpdateDTO
     public string Nome { get; set; }
     public string Email { get; set; }
     public string Plano { get; set; }
+    public int InstrutorId { get; set; }
     public bool Ativo { get; set; }
 }

@@ -35,6 +35,8 @@ public class Aluno
     public string Plano { get; set; } // Ex: "Mensal", "Anual"
 
     public bool Ativo { get; set; } // Verifica se o aluno está ativo na academia
+    public int InstrutorId { get; set; } // Relacionamento com Instrutor
+    public Instrutor Instrutor { get; set; } // Relacionamento 1:M entre Aluno e Instrutor
 
     public List<Treino> Treinos { get; set; } // Relacionamento com Treinos
 }

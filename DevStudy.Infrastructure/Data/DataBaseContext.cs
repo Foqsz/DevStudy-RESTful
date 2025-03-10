@@ -48,5 +48,10 @@ public class DataBaseContext : DbContext
         .HasOne(t => t.Aluno)
         .WithMany(a => a.Treinos)
         .HasForeignKey(t => t.AlunoId);
+
+        modelBuilder.Entity<Aluno>()
+            .HasOne(a => a.Instrutor)
+            .WithMany(i => i.Alunos)
+            .HasForeignKey(a => a.InstrutorId);
     }
 }
