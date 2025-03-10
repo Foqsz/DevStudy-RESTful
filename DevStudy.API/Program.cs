@@ -32,6 +32,8 @@ builder.Services.AddSwaggerGen(doc =>
             Url = new System.Uri("https://github.com/Foqsz")
         }
     });
+
+    doc.EnableAnnotations();
 });
 
 // Configuração da conexão com o banco de dados
