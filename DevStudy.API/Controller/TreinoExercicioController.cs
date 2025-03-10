@@ -3,6 +3,7 @@ using DevStudy.Application.Interfaces;
 using DevStudy.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DevStudy.API.Controller
 {
@@ -20,16 +21,17 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Get all TreinoExercicios
+        /// Obter todos os TreinoExercicios
         /// </summary>
-        /// <returns>List of TreinoExercicios</returns>
-        /// <response code="200">Returns the list of TreinoExercicios</response>
-        /// <response code="404">If no TreinoExercicios are found</response>
-        /// <response code="500">If there is an internal server error</response>
+        /// <returns>Lista de TreinoExercicios</returns>
+        /// <response code="200">Retorna a lista de TreinoExercicios</response>
+        /// <response code="404">Se nenhum TreinoExercicio for encontrado</response>
+        /// <response code="500">Se houver um erro interno no servidor</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Obter todos os TreinoExercicios", Description = "Retorna uma lista de todos os TreinoExercicios")]
         public async Task<ActionResult<IEnumerable<TreinoExercicio>>> GetTreinoExercicios()
         {
             try
@@ -49,17 +51,18 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Get a specific TreinoExercicio by ID
+        /// Obter um TreinoExercicio específico pelo ID
         /// </summary>
-        /// <param name="id">TreinoExercicio ID</param>
+        /// <param name="id">ID do TreinoExercicio</param>
         /// <returns>TreinoExercicio</returns>
-        /// <response code="200">Returns the TreinoExercicio</response>
-        /// <response code="404">If the TreinoExercicio is not found</response>
-        /// <response code="500">If there is an internal server error</response>
+        /// <response code="200">Retorna o TreinoExercicio</response>
+        /// <response code="404">Se o TreinoExercicio não for encontrado</response>
+        /// <response code="500">Se houver um erro interno no servidor</response>
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Obter um TreinoExercicio específico pelo ID", Description = "Retorna um TreinoExercicio pelo ID")]
         public async Task<ActionResult<TreinoExercicio>> GetTreinoExercicioById(int id)
         {
             try
@@ -80,15 +83,16 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Create a new TreinoExercicio
+        /// Criar um novo TreinoExercicio
         /// </summary>
-        /// <param name="treinoExercicio">TreinoExercicio to create</param>
-        /// <returns>Created TreinoExercicio</returns>
-        /// <response code="201">Returns the newly created TreinoExercicio</response>
-        /// <response code="500">If there is an internal server error</response>
+        /// <param name="treinoExercicio">TreinoExercicio a ser criado</param>
+        /// <returns>TreinoExercicio criado</returns>
+        /// <response code="201">Retorna o TreinoExercicio recém-criado</response>
+        /// <response code="500">Se houver um erro interno no servidor</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Criar um novo TreinoExercicio", Description = "Cria um novo TreinoExercicio")]
         public async Task<ActionResult<TreinoExercicioCreateDTO>> CreateTreinoExercicio([FromBody] TreinoExercicioCreateDTO treinoExercicio)
         {
             try
@@ -104,20 +108,21 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Update an existing TreinoExercicio
+        /// Atualizar um TreinoExercicio existente
         /// </summary>
-        /// <param name="id">TreinoExercicio ID</param>
-        /// <param name="treinoExercicio">Updated TreinoExercicio</param>
-        /// <returns>Updated TreinoExercicio</returns>
-        /// <response code="200">Returns the updated TreinoExercicio</response>
-        /// <response code="400">If the ID does not match the TreinoExercicio ID</response>
-        /// <response code="404">If the TreinoExercicio is not found</response>
-        /// <response code="500">If there is an internal server error</response>
+        /// <param name="id">ID do TreinoExercicio</param>
+        /// <param name="treinoExercicio">TreinoExercicio atualizado</param>
+        /// <returns>TreinoExercicio atualizado</returns>
+        /// <response code="200">Retorna o TreinoExercicio atualizado</response>
+        /// <response code="400">Se o ID não corresponder ao ID do TreinoExercicio</response>
+        /// <response code="404">Se o TreinoExercicio não for encontrado</response>
+        /// <response code="500">Se houver um erro interno no servidor</response>
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Atualizar um TreinoExercicio existente", Description = "Atualiza um TreinoExercicio existente")]
         public async Task<ActionResult<TreinoExercicio>> UpdateTreinoExercicio(int id, [FromBody] TreinoExercicio treinoExercicio)
         {
             try
@@ -141,17 +146,18 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Delete a specific TreinoExercicio by ID
+        /// Deletar um TreinoExercicio específico pelo ID
         /// </summary>
-        /// <param name="id">TreinoExercicio ID</param>
-        /// <returns>Deleted TreinoExercicio</returns>
-        /// <response code="200">Returns the deleted TreinoExercicio</response>
-        /// <response code="404">If the TreinoExercicio is not found</response>
-        /// <response code="500">If there is an internal server error</response>
+        /// <param name="id">ID do TreinoExercicio</param>
+        /// <returns>TreinoExercicio deletado</returns>
+        /// <response code="200">Retorna o TreinoExercicio deletado</response>
+        /// <response code="404">Se o TreinoExercicio não for encontrado</response>
+        /// <response code="500">Se houver um erro interno no servidor</response>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Deletar um TreinoExercicio específico pelo ID", Description = "Deleta um TreinoExercicio pelo ID")]
         public async Task<ActionResult<TreinoExercicio>> DeleteTreinoExercicio(int id)
         {
             try

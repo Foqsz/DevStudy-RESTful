@@ -3,6 +3,7 @@ using DevStudy.Application.Interfaces;
 using DevStudy.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DevStudy.API.Controller
 {
@@ -20,13 +21,14 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Get all treinos
+        /// Obter todos os treinos
         /// </summary>
-        /// <returns>List of TreinoDTO</returns>
+        /// <returns>Lista de TreinoDTO</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Obter todos os treinos", Description = "Retorna uma lista de todos os treinos")]
         public async Task<ActionResult<IEnumerable<TreinoDTO>>> GetTreinos()
         {
             try
@@ -47,14 +49,15 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Get treino by id
+        /// Obter treino por id
         /// </summary>
-        /// <param name="id">Treino id</param>
+        /// <param name="id">Id do treino</param>
         /// <returns>TreinoDTO</returns>
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Obter treino por id", Description = "Retorna um treino específico pelo id")]
         public async Task<ActionResult<TreinoDTO>> GetTreinoById(int id)
         {
             try
@@ -75,14 +78,15 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Create a new treino
+        /// Criar um novo treino
         /// </summary>
         /// <param name="treino">TreinoCreateDTO</param>
-        /// <returns>Created TreinoCreateDTO</returns>
+        /// <returns>TreinoCreateDTO criado</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Criar um novo treino", Description = "Cria um novo treino")]
         public async Task<ActionResult<TreinoCreateDTO>> CreateTreino([FromBody] TreinoCreateDTO treino)
         {
             try
@@ -103,15 +107,16 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Update an existing treino
+        /// Atualizar um treino existente
         /// </summary>
-        /// <param name="id">Treino id</param>
+        /// <param name="id">Id do treino</param>
         /// <param name="treinoDto">TreinoCreateDTO</param>
-        /// <returns>Updated TreinoCreateDTO</returns>
+        /// <returns>TreinoCreateDTO atualizado</returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Atualizar um treino existente", Description = "Atualiza um treino existente")]
         public async Task<ActionResult<TreinoCreateDTO>> UpdateTreino(int id, [FromBody] TreinoCreateDTO treinoDto)
         {
             var treinoUpdate = await _treinosService.UpdateTreino(id, treinoDto);
@@ -124,14 +129,15 @@ namespace DevStudy.API.Controller
         }
 
         /// <summary>
-        /// Delete a treino by id
+        /// Deletar um treino por id
         /// </summary>
-        /// <param name="id">Treino id</param>
-        /// <returns>Boolean indicating success</returns>
+        /// <param name="id">Id do treino</param>
+        /// <returns>Boolean indicando sucesso</returns>
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Deletar um treino por id", Description = "Deleta um treino específico pelo id")]
         public async Task<ActionResult<bool>> DeleteTreino(int id)
         {
             var treinoDelete = await _treinosService.DeleteTreino(id);

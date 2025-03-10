@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DevStudy.Domain.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DevStudy.API.Controller
 {
@@ -33,6 +34,7 @@ namespace DevStudy.API.Controller
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerOperation(Summary = "Gets all exercicios", Description = "Retrieves a list of all exercicios.")]
         public async Task<ActionResult<IEnumerable<Exercicio>>> GetExercicios()
         {
             var exerciciosAll = await _exerciciosService.GetExercicios();
@@ -45,7 +47,7 @@ namespace DevStudy.API.Controller
 
             return Ok(exerciciosAll);
         }
-        
+
         /// <summary>
         /// Gets an exercicio by its ID.
         /// </summary>
@@ -54,6 +56,7 @@ namespace DevStudy.API.Controller
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerOperation(Summary = "Gets an exercicio by its ID", Description = "Retrieves an exercicio by its ID.")]
         public async Task<ActionResult<Exercicio>> GetExercicioById(int id)
         {
             var exercicioId = await _exerciciosService.GetExercicioById(id);
@@ -75,6 +78,7 @@ namespace DevStudy.API.Controller
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Creates a new exercicio", Description = "Creates a new exercicio.")]
         public async Task<ActionResult<Exercicio>> CreateExercicio([FromBody] Exercicio exercicio)
         {
             var newExercicio = await _exerciciosService.CreateExercicio(exercicio);
@@ -97,6 +101,7 @@ namespace DevStudy.API.Controller
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Updates an existing exercicio", Description = "Updates an existing exercicio.")]
         public async Task<ActionResult<Exercicio>> UpdateExercicio(int id, [FromBody] Exercicio exercicio)
         {
             var updateExercicio = await _exerciciosService.UpdateExercicio(id, exercicio);
@@ -116,6 +121,7 @@ namespace DevStudy.API.Controller
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Deletes an exercicio by its ID", Description = "Deletes an exercicio by its ID.")]
         public async Task<ActionResult> DeleteExercicio(int id)
         {
             var deleteExercicio = await _exerciciosService.DeleteExercicio(id);

@@ -4,6 +4,7 @@ using DevStudy.Application.Interfaces;
 using DevStudy.Domain.Models;
 
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 /// <summary>
 /// Controller responsável por gerenciar as operações relacionadas aos alunos.
@@ -37,6 +38,7 @@ public class AlunoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Obtém todos os alunos cadastrados", Description = "Retorna uma lista de todos os alunos cadastrados no sistema.")]
     public async Task<ActionResult<IEnumerable<AlunoDTO>>> GetAlunos()
     {
         try
@@ -65,6 +67,7 @@ public class AlunoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Obtém um aluno pelo seu ID", Description = "Retorna os dados de um aluno específico pelo seu ID.")]
     public async Task<ActionResult<AlunoDTO>> GetAluno(int id)
     {
         try
@@ -93,6 +96,7 @@ public class AlunoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Obtém um aluno pelo seu email", Description = "Retorna os dados de um aluno específico pelo seu email.")]
     public async Task<ActionResult<AlunoDTO>> GetAlunoByEmail(string email)
     {
         try
@@ -120,6 +124,7 @@ public class AlunoController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Adiciona um novo aluno", Description = "Adiciona um novo aluno ao sistema.")]
     public async Task<ActionResult<AlunoCreateDTO>> AddAluno([FromBody] AlunoCreateDTO aluno)
     {
         try
@@ -146,6 +151,7 @@ public class AlunoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Atualiza os dados de um aluno", Description = "Atualiza os dados de um aluno específico pelo seu ID.")]
     public async Task<ActionResult<AlunoUpdateDTO>> UpdateAluno(int id, [FromBody] AlunoUpdateDTO aluno)
     {
         try
@@ -179,6 +185,7 @@ public class AlunoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Deleta um aluno pelo seu ID", Description = "Deleta um aluno específico pelo seu ID.")]
     public async Task<ActionResult<AlunoDTO>> DeleteAluno(int id)
     {
         try
