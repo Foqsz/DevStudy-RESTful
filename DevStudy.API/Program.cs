@@ -11,13 +11,17 @@ using DevStudy.Infrastructure.Repository;
 using DevStudy.Application.Services;
 using Microsoft.Extensions.Options;
 using DevStudy.API.Filters;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers(c =>
     c.Filters.Add<ExceptionFilters>()
-);
+).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 builder.Services.AddEndpointsApiExplorer();  
 builder.Services.AddSwaggerGen(doc =>
