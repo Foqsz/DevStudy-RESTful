@@ -34,12 +34,20 @@ public class AlunoRepository : IAlunoRepository
 
     public async Task<Aluno> GetAluno(int id)
     {
-        return await _context.Alunos.FindAsync(id);
+        return await _context.Alunos.Include(a => a.Treinos)
+                                    .ThenInclude(t => t.Exercicios)
+                                    .ThenInclude(te => te.Exercicio)
+                                    .Include(a => a.Instrutor)
+                                    .SingleOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<Aluno> GetAlunoByEmail(string email)
     {
-        return await _context.Alunos.SingleOrDefaultAsync(a => a.Email == email);
+        return await _context.Alunos.Include(a => a.Treinos)
+                                    .ThenInclude(t => t.Exercicios)
+                                    .ThenInclude(te => te.Exercicio)
+                                    .Include(a => a.Instrutor)
+                                    .SingleOrDefaultAsync(a => a.Email == email);
     }
 
     public async Task<Aluno> CreateAluno(Aluno aluno)
