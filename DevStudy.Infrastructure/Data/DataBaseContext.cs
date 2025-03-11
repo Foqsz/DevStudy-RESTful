@@ -39,9 +39,13 @@ public class DataBaseContext : DbContext
             entity.Property(p => p.Descricao)
                 .HasMaxLength(500); // Define o comprimento máximo da descrição
 
-            // Configuração da propriedade "DuracaoMeses"
-            entity.Property(p => p.DuracaoMeses)
-                .IsRequired(); // Torna a duração em meses obrigatória
+            // Configuração da propriedade "DataInicio"
+            entity.Property(p => p.DataInicio)
+                .IsRequired(); // Torna a duração obrigatória
+
+            // Configuração da propriedade "DataFim"
+            entity.Property(p => p.DataFim)
+                .IsRequired(); // Torna a duração obrigatória
         });
 
         modelBuilder.Entity<Treino>()
