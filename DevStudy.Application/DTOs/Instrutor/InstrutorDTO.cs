@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevStudy.Application.DTOs.Aluno;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace DevStudy.Application.DTOs.Instrutor
         [Required]
         [Phone]
         public string Telefone { get; set; }
+        public List<AlunoDTO> Alunos { get; set; }
     }
 }
