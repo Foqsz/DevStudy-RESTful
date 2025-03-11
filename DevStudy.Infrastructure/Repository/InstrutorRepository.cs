@@ -35,7 +35,10 @@ public class InstrutorRepository : IInstrutorRepository
 
     public async Task<Instrutor> GetInstrutor(int id)
     {
-        return await _context.Instrutores.FindAsync(id);
+        return await _context.Instrutores.Include(a => a.Alunos)
+                                         .ThenInclude(a => a.Treinos)
+                                         .ThenInclude(a => a.Exercicios)
+                                         .FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<Instrutor> GetInstrutorByEmail(string email)
