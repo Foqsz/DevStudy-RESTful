@@ -25,7 +25,7 @@ public class InstrutorService : IInstrutorService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Instrutor>> GetInstrutores()
+    public async Task<IEnumerable<InstrutorDTO>> GetInstrutores()
     {
         var instrutores = await _instrutorRepository.GetInstrutores();
 
@@ -35,10 +35,10 @@ public class InstrutorService : IInstrutorService
             return null;
         }
 
-        return instrutores;
+        return _mapper.Map<IEnumerable<InstrutorDTO>>(instrutores);
     }
 
-    public async Task<Instrutor> GetInstrutor(int id)
+    public async Task<InstrutorDTO> GetInstrutor(int id)
     {
         var instrutorId = await _instrutorRepository.GetInstrutor(id);
 
@@ -48,10 +48,10 @@ public class InstrutorService : IInstrutorService
             return null;
         }
 
-        return instrutorId;
+        return _mapper.Map<InstrutorDTO>(instrutorId);
     }
 
-    public async Task<Instrutor> GetInstrutorByEmail(string email)
+    public async Task<InstrutorDTO> GetInstrutorByEmail(string email)
     {
         var instrutorEmail = await _instrutorRepository.GetInstrutorByEmail(email);
 
@@ -61,7 +61,7 @@ public class InstrutorService : IInstrutorService
             return null;
         }
 
-        return instrutorEmail;
+        return _mapper.Map<InstrutorDTO>(instrutorEmail);
     }
 
     public async Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutor)
