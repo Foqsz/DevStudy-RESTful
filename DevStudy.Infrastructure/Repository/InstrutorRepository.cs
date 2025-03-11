@@ -1,4 +1,6 @@
 ﻿
+using AutoMapper;
+using DevStudy.Application.DTOs.Instrutor;
 using DevStudy.Domain.Interfaces;
 using DevStudy.Domain.Models;
 using DevStudy.Infrastructure.Data;
@@ -17,11 +19,13 @@ public class InstrutorRepository : IInstrutorRepository
 {
     private readonly DataBaseContext _context;
     private ILogger<InstrutorRepository> _logger;
+    private IMapper _mapper;
 
-    public InstrutorRepository(DataBaseContext context, ILogger<InstrutorRepository> logger)
+    public InstrutorRepository(DataBaseContext context, ILogger<InstrutorRepository> logger, IMapper mapper)
     {
         _context = context;
         _logger = logger;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<Instrutor>> GetInstrutores()
