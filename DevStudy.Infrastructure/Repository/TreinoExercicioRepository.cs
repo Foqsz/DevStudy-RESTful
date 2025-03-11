@@ -32,7 +32,8 @@ public class TreinoExercicioRepository : ITreinoExercicioRepository
 
     public async Task<TreinoExercicio> GetTreinoExercicioById(int id)
     {
-        return await _context.TreinoExercicios.SingleOrDefaultAsync(x => x.Id == id);
+        return await _context.TreinoExercicios.Include(t => t.Exercicio)
+                                              .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<TreinoExercicio> CreateTreinoExercicio(TreinoExercicio treinoExercicio)
