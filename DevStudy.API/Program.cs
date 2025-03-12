@@ -65,6 +65,9 @@ builder.Services.AddScoped<ITreinoExercicioService, TreinoExercicioService>();
 builder.Services.AddScoped<IInstrutorRepository, InstrutorRepository>();
 builder.Services.AddScoped<IInstrutorService, InstrutorService>();
 
+builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
+builder.Services.AddScoped<IPlanoService, PlanoService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
