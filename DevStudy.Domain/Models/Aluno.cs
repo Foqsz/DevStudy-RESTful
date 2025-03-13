@@ -30,9 +30,9 @@ public class Aluno
     [Required]
     public DateTime DataInscricao { get; set; }
 
-    [Required]
-    [StringLength(20)]
-    public string Plano { get; set; } // Ex: "Mensal", "Anual"
+    [Required] 
+    public int PlanoId { get; set; } // Ex: "Mensal", "Anual"
+    public Plano Plano { get; set; } // Relacionamento 1:1 entre Aluno e Plano
 
     public bool Ativo { get; set; } // Verifica se o aluno está ativo na academia
     public int InstrutorId { get; set; } // Relacionamento com Instrutor

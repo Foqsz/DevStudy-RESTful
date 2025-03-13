@@ -14,5 +14,5 @@ public class AlunoCreateDTO
     public DateTime DataNascimento { get; set; }
     public bool Ativo { get; set; }
     public int InstrutorId { get; set; }
-    public string Plano { get; set; }
+    public int PlanoId { get; set; }
 }

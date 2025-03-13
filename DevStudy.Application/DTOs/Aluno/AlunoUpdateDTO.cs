@@ -11,7 +11,7 @@ public class AlunoUpdateDTO
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Email { get; set; }
-    public string Plano { get; set; }
+    public int PlanoId { get; set; }
     public int InstrutorId { get; set; }
     public bool Ativo { get; set; }
 }

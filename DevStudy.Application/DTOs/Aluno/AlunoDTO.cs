@@ -14,7 +14,7 @@ public class AlunoDTO
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Email { get; set; }
-    public string Plano { get; set; }
+    public Plano Plano { get; set; }
     public bool Ativo { get; set; }
     public InstrutorDTO Instrutor { get; set; } // Relacionamento N:M entre Aluno e Instrutor
     public List<TreinoDTO> Treinos { get; set; } // Relacionamento com Treinos
