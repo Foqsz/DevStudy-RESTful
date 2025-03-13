@@ -28,6 +28,7 @@ public class AlunoRepository : IAlunoRepository
                                  .ThenInclude(t => t.Exercicios)  // Carrega os exercícios dentro de cada treino através da tabela TreinoExercicio
                                  .ThenInclude(te => te.Exercicio)  // Carrega o Exercicio associado ao TreinoExercicio 
                              .Include(a => a.Instrutor)  // Carrega o instrutor
+                             .Include(a => a.Plano)  // Carrega o plano
                              .ToListAsync();
     }
 
@@ -115,7 +116,8 @@ public class AlunoRepository : IAlunoRepository
             alunoCheck.Senha = aluno.Senha;
         }
 
-        alunoCheck.Plano = aluno.Plano;
+        alunoCheck.PlanoId = aluno.PlanoId;
+        alunoCheck.InstrutorId = aluno.InstrutorId;
         alunoCheck.Ativo = aluno.Ativo;
 
         _context.Alunos.Update(alunoCheck);

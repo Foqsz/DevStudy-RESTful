@@ -34,9 +34,9 @@ public class PlanoRepository : IPlanoRepository
 
     public async Task<Plano> CreatePlano(Plano plano)
     {
-        var nomeExist = await _context.Planos.Where(p => p.Nome == plano.Nome).FirstOrDefaultAsync();
+        var nomeExist = await _context.Planos.AnyAsync(p => p.Nome == plano.Nome);
 
-        if (nomeExist == null)
+        if (nomeExist)
         {
             _logger.LogError("Plano com o nome {0} já existe", plano.Nome);
             return null;
