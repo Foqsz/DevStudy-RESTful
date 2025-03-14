@@ -47,11 +47,11 @@ public class PagamentoRepository : IPagamentoRepository
             return null;
         }
 
-        var alunoExist = await _dataBaseContext.Alunos.AnyAsync(a => pagamento.Id == a.Id);
+        var alunoExist = await _dataBaseContext.Alunos.AnyAsync(a => pagamento.AlunoId == a.Id);
 
         if (!alunoExist)
         {
-            _logger.LogError($"O aluno id={pagamento.AlunoId} nãõ foi localizado.");
+            _logger.LogError($"O aluno id={pagamento.AlunoId} não foi localizado.");
             return null;
         }
 
