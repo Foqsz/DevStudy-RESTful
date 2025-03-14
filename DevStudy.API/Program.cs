@@ -68,6 +68,9 @@ builder.Services.AddScoped<IInstrutorService, InstrutorService>();
 builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
 builder.Services.AddScoped<IPlanoService, PlanoService>();
 
+builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+builder.Services.AddScoped<IPagamentoService, PagamentoService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
