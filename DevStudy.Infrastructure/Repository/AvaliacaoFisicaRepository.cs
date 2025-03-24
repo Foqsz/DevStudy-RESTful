@@ -25,9 +25,7 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
 
     public async Task<IEnumerable<AvaliacaoFisica>> GetAvaliacoesFisicas()
     {
-        return await _context.AvaliacoesFisicas.Include(a => a.Aluno)
-                                                   .ThenInclude(a => a.Nome)
-                                                   .ToListAsync();
+        return await _context.AvaliacoesFisicas.ToListAsync();
 
         //var avaliacoesParaSomar = await _context.AvaliacoesFisicas.ToListAsync();
 
@@ -38,9 +36,7 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
 
     public async Task<AvaliacaoFisica> GetAvaliacaoFisica(int id)
     {
-        return await _context.AvaliacoesFisicas.Include(a => a.Aluno)
-                                                   .ThenInclude(a => a.Nome)
-                                                   .SingleOrDefaultAsync(a => a.Id == id);
+        return await _context.AvaliacoesFisicas.SingleOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<AvaliacaoFisica> CreateAvaliacaoFisica(AvaliacaoFisica avaliacaoFisica)
@@ -61,7 +57,7 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
             return null;
         }
 
-        var alunoIMC = avaliacaoExist.Peso / (avaliacaoExist.Altura * avaliacaoExist.Altura);
+        var alunoIMC = avaliacaoFisica.Peso / (avaliacaoFisica.Altura * avaliacaoFisica.Altura);
 
         avaliacaoFisica.IMC = alunoIMC;
 
