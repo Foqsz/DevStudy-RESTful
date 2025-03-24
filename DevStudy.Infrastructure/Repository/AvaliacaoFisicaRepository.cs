@@ -57,10 +57,18 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
             return null;
         }
 
+        // Calcular o IMC
         var alunoIMC = avaliacaoFisica.Peso / (avaliacaoFisica.Altura * avaliacaoFisica.Altura);
+        avaliacaoFisica.IMC = Math.Round(alunoIMC, 2);
 
-        avaliacaoFisica.IMC = alunoIMC;
+        // Calcular a idade do aluno diretamente aqui
+        var idade = DateTime.Now.Year - alunoAvaliado.DataNascimento.Year;
+        if (alunoAvaliado.DataNascimento.Date > DateTime.Now.AddYears(-idade)) idade--; // Ajustar caso ainda não tenha feito aniversário este ano
 
+        // Calcular o Percentual de Gordura usando a fórmula de Deurenberg
+        var percentualGordura = (1.2m * alunoIMC) + (0.23m * idade) - 5.4m;
+        avaliacaoFisica.PercentualGordura = Math.Round(percentualGordura, 2);
+         
         _context.AvaliacoesFisicas.Add(avaliacaoFisica);
         await _context.SaveChangesAsync();
         return avaliacaoFisica;
