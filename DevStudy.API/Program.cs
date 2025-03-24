@@ -49,6 +49,7 @@ builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoExercicioMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(InstrutorMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(AvaliacaoFisicaMappingProfile).Assembly);
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
@@ -70,6 +71,9 @@ builder.Services.AddScoped<IPlanoService, PlanoService>();
 
 builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
 builder.Services.AddScoped<IPagamentoService, PagamentoService>();
+
+builder.Services.AddScoped<IAvaliacaoFisicaRepository, AvaliacaoFisicaRepository>();
+builder.Services.AddScoped<IAvaliacaoFisicaService, AvaliacaoFisicaService>();
 
 var app = builder.Build();
 
