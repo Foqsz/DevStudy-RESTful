@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,6 @@ public class AvaliacaoFisica
 
     [Required]
     public int AlunoId { get; set; } // Relacionamento com Aluno
-
-    [Required]
-    public Aluno Aluno { get; set; } // Propriedade de navegação
 
     [Required]
     public DateTime Data { get; set; }
