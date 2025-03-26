@@ -26,34 +26,108 @@ public class AlunoService : IAlunoService
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<IEnumerable<AlunoViewModel>>(content);
+            var alunos = JsonConvert.DeserializeObject<IEnumerable<AlunoViewModel>>(content);
+            if (alunos == null)
+            {
+                throw new HttpRequestException("Erro ao desserializar a lista de alunos.");
+            }
+            return alunos;
         }
 
-        throw new HttpRequestException($"Erro ao buscar os veículos. {response.StatusCode}");
+        throw new HttpRequestException($"Erro ao buscar os alunos. {response.StatusCode}");
     }
 
-    public Task<AlunoViewModel> GetAluno(int id)
+    public async Task<AlunoViewModel> GetAluno(int id)
     {
-        throw new NotImplementedException();
+        var client = _httpClient;
+
+        var response = await client.GetAsync($"{url}/{id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var aluno = JsonConvert.DeserializeObject<AlunoViewModel>(content);
+            if (aluno == null)
+            {
+                throw new HttpRequestException("Erro ao desserializar o aluno.");
+            }
+            return aluno;
+        }
+
+        throw new HttpRequestException($"Erro ao buscar o aluno. {response.StatusCode}");
     }
 
-    public Task<AlunoViewModel> GetAlunoByEmail(string email)
+    public async Task<AlunoViewModel> GetAlunoByEmail(string email)
     {
-        throw new NotImplementedException();
+        var client = _httpClient;
+
+        var response = await client.GetAsync($"{url}/email/{email}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var aluno = JsonConvert.DeserializeObject<AlunoViewModel>(content);
+            if (aluno == null)
+            {
+                throw new HttpRequestException("Erro ao desserializar o aluno.");
+            }
+            return aluno;
+        }
+
+        throw new HttpRequestException($"Erro ao buscar o aluno. {response.StatusCode}");
     }
 
-    public Task<AlunoViewModel> AddAluno(AlunoViewModel aluno)
+    public async Task<AlunoViewModel> AddAluno(AlunoViewModel aluno)
     {
-        throw new NotImplementedException();
+        var client = _httpClient;
+
+        var response = await client.PostAsJsonAsync($"{url}", aluno);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var addedAluno = JsonConvert.DeserializeObject<AlunoViewModel>(content);
+            if (addedAluno == null)
+            {
+                throw new HttpRequestException("Erro ao desserializar o aluno adicionado.");
+            }
+            return addedAluno;
+        }
+
+        throw new HttpRequestException($"Erro ao adicionar o aluno. {response.StatusCode}");
     }
 
-    public Task<AlunoViewModel> UpdateAluno(int id, AlunoViewModel aluno)
+    public async Task<AlunoViewModel> UpdateAluno(int id, AlunoViewModel aluno)
     {
-        throw new NotImplementedException();
+        var client = _httpClient;
+
+        var response = await client.PutAsJsonAsync($"{url}/{id}", aluno);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var updatedAluno = JsonConvert.DeserializeObject<AlunoViewModel>(content);
+            if (updatedAluno == null)
+            {
+                throw new HttpRequestException("Erro ao desserializar o aluno atualizado.");
+            }
+            return updatedAluno;
+        }
+
+        throw new HttpRequestException($"Erro ao fazer update no aluno. {response.StatusCode}");
     }
 
-    public Task<bool> DeleteAluno(int id)
+    public async Task<bool> DeleteAluno(int id)
     {
-        throw new NotImplementedException();
-    } 
+        var client = _httpClient;
+
+        var response = await client.DeleteAsync($"{url}/{id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
