@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevStudy.Infrastructure.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20250312132834_updateDbPlano2")]
-    partial class updateDbPlano2
+    [Migration("20250324140703_updateAvaliacao3")]
+    partial class updateAvaliacao3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,15 +91,14 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Property<decimal>("IMC")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("PercentualGordura")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<string>("PercentualGordura")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("Peso")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
 
                     b.ToTable("AvaliacoesFisicas");
                 });
@@ -300,17 +299,6 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Instrutor");
 
                     b.Navigation("Plano");
-                });
-
-            modelBuilder.Entity("DevStudy.Domain.Models.AvaliacaoFisica", b =>
-                {
-                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
                 });
 
             modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>

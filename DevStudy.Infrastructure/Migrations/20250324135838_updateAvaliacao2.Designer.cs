@@ -4,6 +4,7 @@ using DevStudy.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevStudy.Infrastructure.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250324135838_updateAvaliacao2")]
+    partial class updateAvaliacao2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +35,6 @@ namespace DevStudy.Infrastructure.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("AvaliacaoId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataInscricao")
                         .HasColumnType("datetime(6)");
@@ -91,13 +91,14 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Property<decimal>("IMC")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<string>("PercentualGordura")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<decimal>("Peso")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AlunoId")
-                        .IsUnique();
 
                     b.ToTable("AvaliacoesFisicas");
                 });
@@ -300,17 +301,6 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Plano");
                 });
 
-            modelBuilder.Entity("DevStudy.Domain.Models.AvaliacaoFisica", b =>
-                {
-                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
-                        .WithOne("Avaliacao")
-                        .HasForeignKey("DevStudy.Domain.Models.AvaliacaoFisica", "AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-                });
-
             modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>
                 {
                     b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
@@ -341,9 +331,6 @@ namespace DevStudy.Infrastructure.Migrations
 
             modelBuilder.Entity("DevStudy.Domain.Models.Aluno", b =>
                 {
-                    b.Navigation("Avaliacao")
-                        .IsRequired();
-
                     b.Navigation("Treinos");
                 });
 
