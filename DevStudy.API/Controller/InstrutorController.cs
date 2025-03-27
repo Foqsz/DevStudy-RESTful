@@ -101,7 +101,7 @@ public class InstrutorController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [SwaggerOperation(Summary = "Cria um novo instrutor", Description = "Cria um novo instrutor com os dados fornecidos.")]
-    public async Task<ActionResult<InstrutorDTO>> CreateInstrutor([FromBody] InstrutorDTO instrutor)
+    public async Task<ActionResult<InstrutorCreateDTO>> CreateInstrutor([FromBody] InstrutorCreateDTO instrutor)
     {
         try
         {
@@ -132,7 +132,7 @@ public class InstrutorController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [SwaggerOperation(Summary = "Atualiza um instrutor existente", Description = "Atualiza os dados de um instrutor existente.")]
-    public async Task<ActionResult<InstrutorDTO>> UpdateInstrutor(int id, [FromBody] InstrutorDTO instrutor)
+    public async Task<ActionResult<InstrutorCreateDTO>> UpdateInstrutor(int id, [FromBody] InstrutorCreateDTO instrutor)
     {
         try
         {

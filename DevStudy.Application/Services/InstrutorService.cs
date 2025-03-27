@@ -64,9 +64,9 @@ public class InstrutorService : IInstrutorService
         return _mapper.Map<InstrutorDTO>(instrutorEmail);
     }
 
-    public async Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutor)
+    public async Task<InstrutorCreateDTO> CreateInstrutor(InstrutorCreateDTO instrutor)
     {
-        var newInstrutor = _mapper.Map<InstrutorDTO, Instrutor>(instrutor);
+        var newInstrutor = _mapper.Map<InstrutorCreateDTO, Instrutor>(instrutor);
 
         var instrutorCreated = await _instrutorRepository.CreateInstrutor(newInstrutor);
 
@@ -76,12 +76,12 @@ public class InstrutorService : IInstrutorService
             return null;
         }
 
-        return _mapper.Map<InstrutorDTO>(instrutorCreated);
+        return _mapper.Map<InstrutorCreateDTO>(instrutorCreated);
     }
 
-    public async Task<InstrutorDTO> UpdateInstrutor(int id, InstrutorDTO instrutor)
+    public async Task<InstrutorCreateDTO> UpdateInstrutor(int id, InstrutorCreateDTO instrutor)
     {
-        var updateInstrutor = _mapper.Map<InstrutorDTO, Instrutor>(instrutor);
+        var updateInstrutor = _mapper.Map<InstrutorCreateDTO, Instrutor>(instrutor);
 
         var instrutorUpdated = await _instrutorRepository.UpdateInstrutor(id, updateInstrutor);
 
@@ -91,7 +91,7 @@ public class InstrutorService : IInstrutorService
             return null;
         }
 
-        return _mapper.Map<InstrutorDTO>(instrutorUpdated);
+        return _mapper.Map<InstrutorCreateDTO>(instrutorUpdated);
     }
 
     public async Task<bool> DeleteInstrutor(int id)

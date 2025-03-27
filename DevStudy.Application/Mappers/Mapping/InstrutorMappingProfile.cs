@@ -14,6 +14,7 @@ namespace DevStudy.Application.Mappers.Mapping
         public InstrutorMappingProfile()
         {
             CreateMap<InstrutorDTO, Instrutor>().ReverseMap().ForMember(dest => dest.Alunos, opt => opt.MapFrom(src => src.Alunos)); // Mapeando Alunos para AlunoDTO;
+            CreateMap<InstrutorCreateDTO, Instrutor>().ReverseMap();
         }
     }
 }
