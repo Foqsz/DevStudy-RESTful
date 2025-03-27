@@ -1,0 +1,47 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.AlunoViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="form-group">
+    <p>Abaixo todas as informações editáveis do aluno <strong>@Model.Nome</strong>.</p>
+</div>
+
+<form asp-action="UpdateAluno" method="post">
+    <!-- Campo oculto para garantir que o ID do aluno seja enviado -->
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Nome">Nome do Aluno</label>
+        <input type="text" class="form-control" asp-for="Nome" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email do Aluno</label>
+        <input type="email" class="form-control" asp-for="Email" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="PlanoId">PlanoID Do Aluno</label>
+        <input type="text" class="form-control" asp-for="PlanoId" />
+    </div>
+    <div class="form-group">
+        <label asp-for="InstrutorId">InstrutorId Do Aluno</label>
+        <input type="text" class="form-control" asp-for="InstrutorId" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Ativo">Atividade Do Aluno</label>
+        <input type="text" class="form-control" asp-for="Ativo" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+</form>
+
+<!-- Exibir mensagens de erro do ModelState -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        <strong>Erro!</strong> Por favor, corrija os erros abaixo.
+    </div>
+}

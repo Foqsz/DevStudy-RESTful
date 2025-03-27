@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.AlunoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>AlunoViewModel</h4>
+
+<form asp-action="CreateAluno" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() <!-- Token anti-forgery para proteção -->
+
+    <div class="form-group">
+        <label asp-for="Nome" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Senha" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Senha" class="form-control" />
+            <span asp-validation-for="Senha" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataNascimento" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="DataNascimento" class="form-control" />
+            <span asp-validation-for="DataNascimento" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="InstrutorId" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="InstrutorId" class="form-control" />
+            <span asp-validation-for="InstrutorId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="PlanoId" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="PlanoId" class="form-control" />
+            <span asp-validation-for="PlanoId" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-info">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
