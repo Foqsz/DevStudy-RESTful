@@ -13,7 +13,7 @@ public interface IInstrutorService
     Task<IEnumerable<InstrutorDTO>> GetInstrutores();
     Task<InstrutorDTO> GetInstrutor(int id);
     Task<InstrutorDTO> GetInstrutorByEmail(string email);
-    Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutor);
-    Task<InstrutorDTO> UpdateInstrutor(int id, InstrutorDTO instrutor);
+    Task<InstrutorCreateDTO> CreateInstrutor(InstrutorCreateDTO instrutor);
+    Task<InstrutorCreateDTO> UpdateInstrutor(int id, InstrutorCreateDTO instrutor);
     Task<bool> DeleteInstrutor(int id); 
 }
