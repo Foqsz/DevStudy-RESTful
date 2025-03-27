@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevStudy.Infrastructure.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20250324140703_updateAvaliacao3")]
-    partial class updateAvaliacao3
+    [Migration("20250327155402_novoDbRefeito")]
+    partial class novoDbRefeito
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,6 @@ namespace DevStudy.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
@@ -91,9 +90,8 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Property<decimal>("IMC")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("PercentualGordura")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<decimal>("PercentualGordura")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("Peso")
                         .HasColumnType("decimal(65,30)");
@@ -253,13 +251,16 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Treinos");
                 });
 
-            modelBuilder.Entity("DevStudy.Domain.Models.TreinoExercicio", b =>
+            modelBuilder.Entity("TreinoExercicio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ExercicioId")
                         .HasColumnType("int");
@@ -274,6 +275,8 @@ namespace DevStudy.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
 
                     b.HasIndex("ExercicioId");
 
@@ -304,7 +307,7 @@ namespace DevStudy.Infrastructure.Migrations
             modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>
                 {
                     b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
-                        .WithMany("Treinos")
+                        .WithMany()
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -312,8 +315,14 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Aluno");
                 });
 
-            modelBuilder.Entity("DevStudy.Domain.Models.TreinoExercicio", b =>
+            modelBuilder.Entity("TreinoExercicio", b =>
                 {
+                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
+                        .WithMany("Treinos")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DevStudy.Domain.Models.Exercicio", "Exercicio")
                         .WithMany()
                         .HasForeignKey("ExercicioId")
@@ -325,6 +334,8 @@ namespace DevStudy.Infrastructure.Migrations
                         .HasForeignKey("TreinoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Aluno");
 
                     b.Navigation("Exercicio");
                 });

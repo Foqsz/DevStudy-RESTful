@@ -48,10 +48,10 @@ public class DataBaseContext : DbContext
                 .IsRequired(); // Torna a duração obrigatória
         });
 
-        modelBuilder.Entity<Treino>()
-        .HasOne(t => t.Aluno)
-        .WithMany(a => a.Treinos)
-        .HasForeignKey(t => t.AlunoId);
+        modelBuilder.Entity<TreinoExercicio>()
+            .HasOne(te => te.Aluno)
+            .WithMany(a => a.Treinos)
+            .HasForeignKey(te => te.AlunoId); // Alterado para AlunoId
 
         modelBuilder.Entity<Aluno>()
             .HasOne(a => a.Instrutor)
@@ -62,7 +62,6 @@ public class DataBaseContext : DbContext
             .HasOne(a => a.Plano)
             .WithMany() // Sem coleção em Plano, pois é 1:1
             .HasForeignKey(a => a.PlanoId)
-            .IsRequired();  
-
+            .IsRequired();
     }
 }

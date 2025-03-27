@@ -33,9 +33,6 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("AvaliacaoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DataInscricao")
                         .HasColumnType("datetime(6)");
 
@@ -58,7 +55,6 @@ namespace DevStudy.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
@@ -91,13 +87,13 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Property<decimal>("IMC")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<decimal>("PercentualGordura")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<decimal>("Peso")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AlunoId")
-                        .IsUnique();
 
                     b.ToTable("AvaliacoesFisicas");
                 });
@@ -252,13 +248,16 @@ namespace DevStudy.Infrastructure.Migrations
                     b.ToTable("Treinos");
                 });
 
-            modelBuilder.Entity("DevStudy.Domain.Models.TreinoExercicio", b =>
+            modelBuilder.Entity("TreinoExercicio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ExercicioId")
                         .HasColumnType("int");
@@ -273,6 +272,8 @@ namespace DevStudy.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
 
                     b.HasIndex("ExercicioId");
 
@@ -300,21 +301,10 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Plano");
                 });
 
-            modelBuilder.Entity("DevStudy.Domain.Models.AvaliacaoFisica", b =>
-                {
-                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
-                        .WithOne("Avaliacao")
-                        .HasForeignKey("DevStudy.Domain.Models.AvaliacaoFisica", "AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-                });
-
             modelBuilder.Entity("DevStudy.Domain.Models.Treino", b =>
                 {
                     b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
-                        .WithMany("Treinos")
+                        .WithMany()
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -322,8 +312,14 @@ namespace DevStudy.Infrastructure.Migrations
                     b.Navigation("Aluno");
                 });
 
-            modelBuilder.Entity("DevStudy.Domain.Models.TreinoExercicio", b =>
+            modelBuilder.Entity("TreinoExercicio", b =>
                 {
+                    b.HasOne("DevStudy.Domain.Models.Aluno", "Aluno")
+                        .WithMany("Treinos")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DevStudy.Domain.Models.Exercicio", "Exercicio")
                         .WithMany()
                         .HasForeignKey("ExercicioId")
@@ -336,14 +332,13 @@ namespace DevStudy.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Aluno");
+
                     b.Navigation("Exercicio");
                 });
 
             modelBuilder.Entity("DevStudy.Domain.Models.Aluno", b =>
                 {
-                    b.Navigation("Avaliacao")
-                        .IsRequired();
-
                     b.Navigation("Treinos");
                 });
 
