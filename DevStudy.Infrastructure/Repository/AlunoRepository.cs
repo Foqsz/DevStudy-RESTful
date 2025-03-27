@@ -25,8 +25,7 @@ public class AlunoRepository : IAlunoRepository
     {
         return await _context.Alunos
                              .Include(a => a.Treinos)  // Carrega os treinos
-                                 .ThenInclude(t => t.Exercicios)  // Carrega os exercícios dentro de cada treino através da tabela TreinoExercicio
-                                 .ThenInclude(te => te.Exercicio)  // Carrega o Exercicio associado ao TreinoExercicio 
+                                 .ThenInclude(t => t.Exercicio)  // Carrega os exercícios dentro de cada treino através da tabela TreinoExercicio
                              .Include(a => a.Instrutor)  // Carrega o instrutor
                              .Include(a => a.Plano)  // Carrega o plano
                              .ToListAsync();
@@ -36,20 +35,16 @@ public class AlunoRepository : IAlunoRepository
     public async Task<Aluno> GetAluno(int id)
     {
         return await _context.Alunos.Include(a => a.Treinos)
-                                        .ThenInclude(t => t.Exercicios)
-                                        .ThenInclude(te => te.Exercicio)
+                                    .ThenInclude(t => t.Exercicio)
                                     .Include(a => a.Instrutor)
-                                    .Include(a => a.Plano)
                                     .SingleOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<Aluno> GetAlunoByEmail(string email)
     {
         return await _context.Alunos.Include(a => a.Treinos)
-                                    .ThenInclude(t => t.Exercicios)
                                     .ThenInclude(te => te.Exercicio)
                                     .Include(a => a.Instrutor)
-                                    .Include(a => a.Plano)
                                     .SingleOrDefaultAsync(a => a.Email == email);
     }
 

@@ -30,15 +30,24 @@ public class AvaliacaoFisicaController : ControllerBase
     [SwaggerOperation(Summary = "Get all physical evaluations", Description = "Returns a list of all physical evaluations.")]
     public async Task<ActionResult<IEnumerable<AvaliacaoFisica>>> GetAvaliacoes()
     {
-        var avaliacaoAll = await _avaliacaoFisicaService.GetAvaliacoesFisicas();
-
-        if (avaliacaoAll == null)
+        try
         {
-            _logger.LogError("Nenhuma avaliação encontrada.");
-            return NotFound("Nenhuma avaliação encontrada no sistema.");
+            var avaliacaoAll = await _avaliacaoFisicaService.GetAvaliacoesFisicas();
+
+            if (avaliacaoAll == null)
+            {
+                _logger.LogError("Nenhuma avaliação encontrada.");
+                return NotFound("Nenhuma avaliação encontrada no sistema.");
+            }
+
+            return Ok(avaliacaoAll);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao tentar obter todos os alunos");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter todos os alunos");
         }
 
-        return Ok(avaliacaoAll);
     }
 
     /// <summary>
@@ -52,13 +61,21 @@ public class AvaliacaoFisicaController : ControllerBase
     [SwaggerOperation(Summary = "Get a physical evaluation by ID", Description = "Returns a physical evaluation by its ID.")]
     public async Task<ActionResult<AvaliacaoFisica>> GetAvaliacao(int id)
     {
-        var avaliacaoId = await _avaliacaoFisicaService.GetAvaliacaoFisica(id);
-        if (avaliacaoId == null)
+        try
         {
-            _logger.LogError($"Avaliação de ID={id} não encontrada.");
-            return NotFound($"Avaliação de ID={id} não encontrada.");
+            var avaliacaoId = await _avaliacaoFisicaService.GetAvaliacaoFisica(id);
+            if (avaliacaoId == null)
+            {
+                _logger.LogError($"Avaliação de ID={id} não encontrada.");
+                return NotFound($"Avaliação de ID={id} não encontrada.");
+            }
+            return Ok(avaliacaoId);
         }
-        return Ok(avaliacaoId);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao tentar obter todos os alunos");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter todos os alunos");
+        }
     }
 
     /// <summary>
@@ -72,13 +89,21 @@ public class AvaliacaoFisicaController : ControllerBase
     [SwaggerOperation(Summary = "Create a new physical evaluation", Description = "Creates a new physical evaluation.")]
     public async Task<ActionResult<AvaliacaoFisicaDTO>> CreateAvaliacao([FromBody] AvaliacaoFisicaDTO avaliacaoFisicaDTO)
     {
-        var newAvaliacao = await _avaliacaoFisicaService.CreateAvaliacaoFisica(avaliacaoFisicaDTO);
-        if (newAvaliacao == null)
+        try
         {
-            _logger.LogError("Erro ao criar avaliação.");
-            return BadRequest("Erro ao criar avaliação.");
+            var newAvaliacao = await _avaliacaoFisicaService.CreateAvaliacaoFisica(avaliacaoFisicaDTO);
+            if (newAvaliacao == null)
+            {
+                _logger.LogError("Erro ao criar avaliação.");
+                return BadRequest("Erro ao criar avaliação.");
+            }
+            return Ok(newAvaliacao);
         }
-        return Ok(newAvaliacao);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao tentar obter todos os alunos");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter todos os alunos");
+        }
     }
 
     /// <summary>
@@ -93,15 +118,23 @@ public class AvaliacaoFisicaController : ControllerBase
     [SwaggerOperation(Summary = "Update an existing physical evaluation", Description = "Updates an existing physical evaluation.")]
     public async Task<ActionResult<AvaliacaoFisicaDTO>> UpdateAvaliacao(int id, [FromBody] AvaliacaoFisicaDTO avaliacaoFisicaDTO)
     {
-        var updateAvaliacao = await _avaliacaoFisicaService.UpdateAvaliacaoFisica(id, avaliacaoFisicaDTO);
-
-        if (updateAvaliacao == null)
+        try
         {
-            _logger.LogError($"Erro ao atualizar avaliação de ID={id}.");
-            return BadRequest($"Erro ao atualizar avaliação de ID={id}.");
-        }
+            var updateAvaliacao = await _avaliacaoFisicaService.UpdateAvaliacaoFisica(id, avaliacaoFisicaDTO);
 
-        return Ok(updateAvaliacao);
+            if (updateAvaliacao == null)
+            {
+                _logger.LogError($"Erro ao atualizar avaliação de ID={id}.");
+                return BadRequest($"Erro ao atualizar avaliação de ID={id}.");
+            }
+
+            return Ok(updateAvaliacao);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao tentar obter todos os alunos");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter todos os alunos");
+        }
     }
 
     /// <summary>
@@ -115,12 +148,20 @@ public class AvaliacaoFisicaController : ControllerBase
     [SwaggerOperation(Summary = "Delete a physical evaluation by ID", Description = "Deletes a physical evaluation by its ID.")]
     public async Task<ActionResult<AvaliacaoFisica>> AvaliacaoFisica(int id)
     {
-        var deleteAvaliacao = await _avaliacaoFisicaService.DeleteAvaliacaoFisica(id);
-        if (!deleteAvaliacao)
+        try
         {
-            _logger.LogError($"Erro ao deletar avaliação de ID={id}.");
-            return NotFound($"Não foi localizado avaliação com o id={id}");
+            var deleteAvaliacao = await _avaliacaoFisicaService.DeleteAvaliacaoFisica(id);
+            if (!deleteAvaliacao)
+            {
+                _logger.LogError($"Erro ao deletar avaliação de ID={id}.");
+                return NotFound($"Não foi localizado avaliação com o id={id}");
+            }
+            return Ok(deleteAvaliacao);
         }
-        return Ok(deleteAvaliacao);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao tentar obter todos os alunos");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter todos os alunos");
+        }
     }
 }

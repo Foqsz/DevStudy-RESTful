@@ -37,7 +37,7 @@ public class InstrutorRepository : IInstrutorRepository
     {
         return await _context.Instrutores.Include(a => a.Alunos)
                                          .ThenInclude(a => a.Treinos)
-                                         .ThenInclude(a => a.Exercicios)
+                                         .ThenInclude(a => a.Exercicio)
                                          .FirstOrDefaultAsync(i => i.Id == id);
     }
 

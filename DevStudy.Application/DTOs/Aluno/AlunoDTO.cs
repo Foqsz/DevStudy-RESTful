@@ -1,5 +1,6 @@
 ﻿using DevStudy.Application.DTOs.Instrutor;
 using DevStudy.Application.DTOs.Treino;
+using DevStudy.Application.DTOs.TreinoExercicio;
 using DevStudy.Domain.Models; 
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ public class AlunoDTO
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Email { get; set; }
-    public Plano Plano { get; set; }
+    public Plano? Plano { get; set; }
     public bool Ativo { get; set; }
-    public InstrutorDTO Instrutor { get; set; } // Relacionamento N:M entre Aluno e Instrutor
-    public List<TreinoDTO> Treinos { get; set; } // Relacionamento com Treinos
+    public InstrutorDTO? Instrutor { get; set; } // Relacionamento N:M entre Aluno e Instrutor
+    public List<TreinoExercicioDTO>? Treinos { get; set; } // Relacionamento com Treinos
 }

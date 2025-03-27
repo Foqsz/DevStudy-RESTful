@@ -6,13 +6,13 @@
 @model IEnumerable<DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.AlunoViewModel>
 
 @{
-    ViewData["Title"] = "Alunos";
+    ViewData["Title"] = "Alunos da Academia";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-controller="Aluno" asp-action="CreateAluno">Create New</a>
+    <a asp-controller="Aluno" asp-action="CreateAluno">Registrar Novo Aluno</a>
 </p>
 
 <table class="table">
@@ -29,15 +29,15 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
-            </th> 
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Plano)
-            </th> 
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Instrutor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Treinos)
+                Treinos
             </th>
             <th></th>
         </tr>
@@ -57,30 +57,42 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Ativo)
-                </td> 
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Plano)
-                </td> 
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Instrutor)
                 </td>
                 <td>
-                    <td>
-                        @foreach (var treino in item.Treinos)  
-                        {  
-                           <div>   
-                               @foreach (var exercicio in treino.Exercicios)  
-                               { 
-                                <p>@exercicio.Nome, @exercicio.Tipo, @exercicio.Descricao, Duração: @exercicio.DuraçãoMinutos</p>  
-                               }  
-                           </div>  
-                        }
-                    </td>
-                    @Html.DisplayFor(modelItem => item.Treinos)
+                    <!-- Exibindo os treinos do aluno -->
+                    @if (item.Treinos != null && item.Treinos.Any())
+                    {
+                        <ul>
+                            @foreach (var treino in item.Treinos)
+                            {
+                                <li>
+                                    <strong>Exercicio:</strong> @treino.Exercicio.Nome <br />
+                                    <strong>Repetições:</strong> @treino.Repeticoes <br />
+                                    <strong>Séries:</strong> @treino.Series
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>Sem treinos registrados</span>
+                    }
                 </td>
                 <td>
-                    <a asp-controller="Aluno" asp-action="UpdateAluno" asp-route-id="@item.Id">Edit</a> | 
-                    <a asp-controller="Aluno" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <br />
+                    <br />
+                    <a asp-controller="Aluno" asp-action="UpdateAluno" asp-route-id="@item.Id">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a asp-controller="Aluno" asp-action="DeleteAluno" asp-route-id="@item.Id">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
                 </td>
             </tr>
         }

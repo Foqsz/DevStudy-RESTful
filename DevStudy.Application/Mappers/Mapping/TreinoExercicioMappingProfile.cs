@@ -14,6 +14,7 @@ namespace DevStudy.Application.Mappers.Mapping
         public TreinoExercicioMappingProfile()
         {
             CreateMap<TreinoExercicioCreateDTO, TreinoExercicio>().ReverseMap();
+            CreateMap<TreinoExercicioDTO, TreinoExercicio>().ReverseMap();
         }
     }
 }

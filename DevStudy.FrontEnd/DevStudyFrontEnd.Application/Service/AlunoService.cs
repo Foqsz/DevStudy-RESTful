@@ -1,6 +1,7 @@
 ﻿using DevStudy.FrontEnd.DevStudyFrontEnd.Application.Interface;
 using DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models;
 using Newtonsoft.Json;
+using System.Text;
 using System.Text.Json;
 
 namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service;
@@ -100,8 +101,9 @@ public class AlunoService : IAlunoService
     public async Task<AlunoViewModel> UpdateAluno(int id, AlunoViewModel aluno)
     {
         var client = _httpClient;
+        var alunoJson = new StringContent(JsonConvert.SerializeObject(aluno), Encoding.UTF8, "application/json");
 
-        var response = await client.PutAsJsonAsync($"{url}/{id}", aluno);
+        var response = await client.PatchAsync($"{url}/{id}", alunoJson);
 
         if (response.IsSuccessStatusCode)
         {

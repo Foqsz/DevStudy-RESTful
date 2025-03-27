@@ -12,6 +12,7 @@ public class TreinoExercicioCreateDTO
     public int Id { get; set; }
 
     public int TreinoId { get; set; }
+    public int AlunoId { get; set; } // Chave estrangeira para Aluno
 
     public int ExercicioId { get; set; }
 
