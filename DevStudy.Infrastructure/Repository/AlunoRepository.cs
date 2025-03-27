@@ -36,9 +36,10 @@ public class AlunoRepository : IAlunoRepository
     public async Task<Aluno> GetAluno(int id)
     {
         return await _context.Alunos.Include(a => a.Treinos)
-                                    .ThenInclude(t => t.Exercicios)
-                                    .ThenInclude(te => te.Exercicio)
+                                        .ThenInclude(t => t.Exercicios)
+                                        .ThenInclude(te => te.Exercicio)
                                     .Include(a => a.Instrutor)
+                                    .Include(a => a.Plano)
                                     .SingleOrDefaultAsync(a => a.Id == id);
     }
 
@@ -48,6 +49,7 @@ public class AlunoRepository : IAlunoRepository
                                     .ThenInclude(t => t.Exercicios)
                                     .ThenInclude(te => te.Exercicio)
                                     .Include(a => a.Instrutor)
+                                    .Include(a => a.Plano)
                                     .SingleOrDefaultAsync(a => a.Email == email);
     }
 
@@ -75,7 +77,7 @@ public class AlunoRepository : IAlunoRepository
         {
             _logger.LogError("Instrutor não existente.");
             return null;
-        }
+        } 
 
         _context.Alunos.Add(aluno);
         await _context.SaveChangesAsync();
