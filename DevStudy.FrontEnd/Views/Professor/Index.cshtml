@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.ExercicioViewModel>
+
+@{
+    ViewData["Title"] = "Painel do Professor";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    Painel Administrativo do Professor
+</p> 
+<hr />
+<p>
+    Tutorial: <br />
+   1° - Crie um Exercicio; <br />
+    2° - Registre no Treino; <br />
+   3° - Registre um Treino Exercicio.
+</p>
+<hr />
+<p>
+    <a asp-controller="TreinoExercicio" asp-action="Index" class="btn btn-secondary">Gerenciar Treinos Exercicio</a>
+</p>
+
+<p>
+    <a asp-controller="Exercicios" asp-action="Index" class="btn btn-secondary">Gerenciar Exercicios</a>
+</p>
+
