@@ -59,11 +59,34 @@
                     @Html.DisplayFor(modelItem => item.Ativo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Plano)
+                    @if (item.Plano != null)
+                    {
+                        <ul>
+                            <li>
+                                <strong>Id:</strong> @item.Plano.Id <br />
+                                <strong>Nome:</strong> @item.Plano.Nome <br />
+                                <strong>Preço:</strong> R$@item.Plano.Preco <br />
+                                <strong>Descrição:</strong> @item.Plano.Descricao <br />
+                                <strong>Inicio:</strong> @item.Plano.DataInicio <br />
+                                <strong>Fim:</strong> @item.Plano.DataFim
+                            </li>
+                        </ul>
+                    }
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Instrutor)
-                </td>
+                    <td> 
+                        @if (item.Instrutor != null)
+                        {
+                            <ul>
+                                <li>
+                                    <strong>Id:</strong> @item.Instrutor.Id <br />
+                                    <strong>Nome:</strong> @item.Instrutor.Nome <br />
+                                    <strong>Especialidade:</strong> @item.Instrutor.Especialidade <br />
+                                    <strong>Email:</strong> @item.Instrutor.Email <br />
+                                    <strong>Telefone:</strong> @item.Instrutor.Telefone
+                                </li>
+                            </ul>
+                        }
+                    </td>
                 <td>
                     <!-- Exibindo os treinos do aluno -->
                     @if (item.Treinos != null && item.Treinos.Any())
@@ -84,14 +107,12 @@
                         <span>Sem treinos registrados</span>
                     }
                 </td>
-                <td>
-                    <br />
-                    <br />
-                    <a asp-controller="Aluno" asp-action="UpdateAluno" asp-route-id="@item.Id">
-                        <i class="fas fa-edit"></i>
-                    </a> |
-                    <a asp-controller="Aluno" asp-action="DeleteAluno" asp-route-id="@item.Id">
-                        <i class="fas fa-trash-alt"></i>
+                <td class="botoes">
+                    <a asp-controller="Aluno" asp-action="UpdateAluno" asp-route-id="@item.Id" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Editar
+                    </a> 
+                    <a asp-controller="Aluno" asp-action="DeleteAluno" asp-route-id="@item.Id" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Excluir
                     </a>
                 </td>
             </tr>
