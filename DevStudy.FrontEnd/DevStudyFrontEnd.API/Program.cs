@@ -13,6 +13,8 @@ builder.Services.AddHttpClient("DevStudyAPI", client =>
 });
 
 builder.Services.AddScoped<IAlunoService, AlunoService>();
+builder.Services.AddScoped<ITreinoExercicioService, TreinoExercicioService>();
+builder.Services.AddScoped<IExercicioService, ExerciciosService>();
 
 var app = builder.Build();
 
