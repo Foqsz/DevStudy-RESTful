@@ -6,14 +6,19 @@
 @model IEnumerable<DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.AlunoViewModel>
 
 @{
-    ViewData["Title"] = "Alunos da Academia";
+    ViewData["Title"] = "Controle de Alunos";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-controller="Aluno" asp-action="CreateAluno">Registrar Novo Aluno</a>
+    Painel Administrativo de Gerenciamento dos Alunos da Academia
 </p>
+
+<p>
+    <a asp-controller="Aluno" asp-action="CreateAluno" class="btn btn-primary">Registrar Novo Aluno</a>
+</p>
+
 
 <table class="table">
     <thead>
