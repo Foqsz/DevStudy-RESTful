@@ -1,0 +1,50 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.ExercicioViewModel
+
+@{
+    ViewData["Title"] = "Delete Exercicio";
+}
+
+<form asp-action="DeleteExercicio" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() <!-- Token anti-forgery para proteção -->
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <p>Tem certeza de que deseja excluir o Exercicio <strong>@Model.Nome (ID: @Model.Id)</strong>?</p>
+    </div>
+
+    <div class="form-group">
+        <p>Confira as informações do Exercicio <strong>@Model.Nome</strong>:</p>
+    </div>
+
+    <!-- Exibir os dados sem permitir edição (usar campo hidden para enviar os dados corretamente) -->
+    <div class="form-group">
+        <label for="Nome">Nome</label>
+        <input type="hidden" asp-for="Nome" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.Nome" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="Descricao">Descricao</label>
+        <input type="hidden" asp-for="Descricao" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.Descricao" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="Tipo">Tipo</label>
+        <input type="hidden" asp-for="Tipo" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.Tipo" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="DuraçãoMinutos">DuraçãoMinutos</label>
+        <input type="hidden" asp-for="DuraçãoMinutos" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.DuraçãoMinutos" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-info">Retornar</a>
+        </div>
+    </div>
+</form>
