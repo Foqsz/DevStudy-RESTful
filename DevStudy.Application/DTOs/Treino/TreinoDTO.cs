@@ -11,5 +11,7 @@ public class TreinoDTO
 {
     public int Id { get; set; }
     public DateTime Data { get; set; }
+    public int AlunoId { get; set; }  
+    public int ExercicioId { get; set; }  
     public List<Exercicio> Exercicios { get; set; } // Lista de exercícios do treino 
 }
