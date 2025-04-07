@@ -18,6 +18,6 @@ public class TreinoExercicioViewModel
 
     [Range(1, int.MaxValue, ErrorMessage = "Series must be greater than 0")]
     public int Series { get; set; } // Quantidade de séries
-    public ExercicioViewModel Exercicio { get; set; }
-    public AlunoViewModel Aluno { get; set; }
+    public ExercicioViewModel? Exercicio { get; set; }
+    public AlunoViewModel? Aluno { get; set; }
 }
