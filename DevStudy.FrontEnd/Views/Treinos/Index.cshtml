@@ -11,7 +11,7 @@
 </p>
 
 <p>
-    <a asp-controller="Treinos" asp-action="CreateTreinoExercicio" class="btn btn-primary">Registrar Novo Treino</a>
+    <a asp-controller="Treinos" asp-action="CreateTreino" class="btn btn-primary">Registrar Novo Treino</a>
 </p>
 
 
@@ -23,7 +23,13 @@
             </th> 
             <th>
                 @Html.DisplayNameFor(model => model.Data)
-            </th> 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlunoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExercicioId)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,12 +42,18 @@
                 </td> 
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)
-                </td>  
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlunoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExercicioId)
+                </td>
                 <td class="botoes">
-                    <a asp-controller="Aluno" asp-action="UpdateAluno" asp-route-id="@item.Id" class="btn btn-primary">
+                    <a asp-controller="Treinos" asp-action="UpdateTreino" asp-route-id="@item.Id" class="btn btn-primary">
                         <i class="fas fa-edit"></i> Editar
                     </a>
-                    <a asp-controller="Aluno" asp-action="DeleteAluno" asp-route-id="@item.Id" class="btn btn-danger">
+                    <a asp-controller="Treinos" asp-action="DeleteTreino" asp-route-id="@item.Id" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i> Excluir
                     </a>
                 </td>
