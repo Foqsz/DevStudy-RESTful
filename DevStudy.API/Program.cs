@@ -43,7 +43,10 @@ builder.Services.AddSwaggerGen(doc =>
 // Configuração da conexão com o banco de dados
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataBaseContext>(options =>
-    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+{
+    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection));
+    options.EnableSensitiveDataLogging();
+});
 
 builder.Services.AddAutoMapper(typeof(AlunoMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(TreinoMappingProfile).Assembly);
