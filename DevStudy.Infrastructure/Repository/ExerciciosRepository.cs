@@ -50,7 +50,7 @@ public class ExerciciosRepository : IExerciciosRepository
 
     public async Task<Exercicio> UpdateExercicio(int id, Exercicio exercicio)
     {
-        var checkExercicio = await _context.Exercicios.FindAsync(id);
+        var checkExercicio = await _context.Exercicios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
         if (checkExercicio == null)
         {

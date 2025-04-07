@@ -83,7 +83,7 @@ public class ExerciciosService : IExercicioService
         var client = _httpClient;
         var exercicioJson = new StringContent(JsonConvert.SerializeObject(exercicio), Encoding.UTF8, "application/json");
 
-        var response = await client.PatchAsync($"{url}/{id}", exercicioJson);
+        var response = await client.PutAsync($"{url}/{id}", exercicioJson);
 
         if (response.IsSuccessStatusCode)
         {

@@ -1,0 +1,43 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.ExercicioViewModel
+
+@{
+    ViewData["Title"] = "Atualizar Exercicio";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="form-group">
+    <p>Abaixo todas as informações editáveis do Exercicio <strong>@Model.Nome</strong>, de id <strong>@Model.Id</strong>.</p>
+</div>
+
+<form asp-action="UpdateExercicio" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Nome">Nome do Exercicio</label>
+        <input type="text" class="form-control" asp-for="Nome" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Descricao">Descricao do Exercicio</label>
+        <input type="Descricao" class="form-control" asp-for="Descricao" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Tipo">Tipo Do Exercicio</label>
+        <input type="text" class="form-control" asp-for="Tipo" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DuraçãoMinutos">DuraçãoMinutos Do Exercicio</label>
+        <input type="text" class="form-control" asp-for="DuraçãoMinutos" />
+    </div> 
+
+    <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+    <a asp-action="Index" class="btn btn-info">Retornar</a>
+</form>
+
+<!-- Exibir mensagens de erro do ModelState -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        <strong>Erro!</strong> Por favor, corrija os erros abaixo.
+    </div>
+}
