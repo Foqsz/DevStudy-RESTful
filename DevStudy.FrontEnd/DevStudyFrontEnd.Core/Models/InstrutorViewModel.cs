@@ -22,5 +22,5 @@ public class InstrutorViewModel
     [Phone]
     public string Telefone { get; set; }
 
-    public List<AlunoViewModel> Alunos { get; set; } // Relacionamento N:M entre Instrutor e Aluno (caso o instrutor tenha múltiplos alunos)
+    public List<AlunoViewModel>? Alunos { get; set; } // Relacionamento N:M entre Instrutor e Aluno (caso o instrutor tenha múltiplos alunos)
 }
