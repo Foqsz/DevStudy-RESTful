@@ -1,0 +1,34 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.TreinoViewModel
+
+@{
+    ViewData["Title"] = "Delete Treino Exercicio";
+}
+
+<form asp-action="DeleteTreinoExercicio" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() <!-- Token anti-forgery para proteção -->
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <p>Tem certeza de que deseja excluir o Treino <strong>(ID: @Model.Id)</strong>?</p>
+    </div> 
+
+    <!-- Exibir os dados sem permitir edição (usar campo hidden para enviar os dados corretamente) -->
+    <div class="form-group">
+        <label for="ID Do Aluno">AlunoId</label>
+        <input type="hidden" asp-for="AlunoId" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.AlunoId" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="ID Do Exercicio">ExercicioId</label>
+        <input type="hidden" asp-for="ExercicioId" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.ExercicioId" class="form-control" readonly />
+    </div> 
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-info">Retornar</a>
+        </div>
+    </div>
+</form>
