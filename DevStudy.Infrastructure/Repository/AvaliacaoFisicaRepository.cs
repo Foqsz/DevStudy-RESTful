@@ -56,6 +56,16 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
             _logger.LogError("Aluno não existente.");
             return null;
         }
+         
+        var avaliacaoAlunoExist = await _context.AvaliacoesFisicas
+            .Where(a => a.AlunoId == avaliacaoFisica.AlunoId)
+            .ToListAsync();
+
+        if (avaliacaoAlunoExist.Any())
+        {
+            _logger.LogError("Avaliação já cadastrada para este aluno.");
+            return null;
+        }
 
         // Calcular o IMC
         var alunoIMC = avaliacaoFisica.Peso / (avaliacaoFisica.Altura * avaliacaoFisica.Altura);
@@ -68,7 +78,32 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
         // Calcular o Percentual de Gordura usando a fórmula de Deurenberg
         var percentualGordura = (1.2m * alunoIMC) + (0.23m * idade) - 5.4m;
         avaliacaoFisica.PercentualGordura = Math.Round(percentualGordura, 2);
-         
+
+        if ((double)alunoIMC <= 18.5)
+        {
+            avaliacaoFisica.ClassificacaoIMC = "Abaixo do peso";
+        }
+        else if ((double)alunoIMC > 18.5 && (double)alunoIMC <= 24.9)
+        {
+            avaliacaoFisica.ClassificacaoIMC = "Peso normal";
+        }
+        else if ((double)alunoIMC > 24.9 && (double)alunoIMC <= 29.9)
+        {
+            avaliacaoFisica.ClassificacaoIMC = "Sobrepeso";
+        }
+        else if ((double)alunoIMC > 29.9 && (double)alunoIMC <= 34.9)
+        {
+            avaliacaoFisica.ClassificacaoIMC = "Obesidade I";
+        }
+        else if ((double)alunoIMC > 34.9 && (double)alunoIMC <= 39.9)
+        {
+            avaliacaoFisica.ClassificacaoIMC = "Obesidade II";
+        }
+        else
+        {
+            avaliacaoFisica.ClassificacaoIMC = "Obesidade III";
+        }
+
         _context.AvaliacoesFisicas.Add(avaliacaoFisica);
         await _context.SaveChangesAsync();
         return avaliacaoFisica;
