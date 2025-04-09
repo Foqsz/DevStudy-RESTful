@@ -34,4 +34,5 @@ public class AvaliacaoFisica
     [Required]
     [Range(0, 100)]
     public decimal PercentualGordura { get; set; }
+    public string ClassificacaoIMC { get; set; } // Classificação do IMC (Abaixo do peso, Peso normal, Sobrepeso, Obesidade I, II ou III)
 }
