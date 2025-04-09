@@ -16,15 +16,11 @@ public class AvaliacaoFisicaViewModel
     [Range(0, 300)]
     public decimal Peso { get; set; }
 
-    [Required]
-    [Range(0, 3)]
+    [Required] 
     public decimal Altura { get; set; }
 
-    [Required]
-    [Range(0, 100)]
-    public decimal IMC { get; set; } // Cálculo do Índice de Massa Corporal
-
-    [Required]
-    [Range(0, 100)]
-    public decimal PercentualGordura { get; set; }
+    public decimal? IMC { get; set; } // Cálculo do Índice de Massa Corporal
+      
+    public decimal? PercentualGordura { get; set; }
+    public string? ClassificacaoIMC { get; set; }  
 }
