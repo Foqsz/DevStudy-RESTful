@@ -62,6 +62,7 @@ public class DataBaseContext : DbContext
             .HasOne(a => a.Plano)
             .WithMany() // Sem coleção em Plano, pois é 1:1
             .HasForeignKey(a => a.PlanoId)
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

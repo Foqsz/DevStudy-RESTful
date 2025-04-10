@@ -84,9 +84,16 @@ public class PlanoRepository : IPlanoRepository
             return false;
         }
 
+        var alunosAssociados = await _context.Alunos.AnyAsync(a => a.PlanoId == id);
+        if (alunosAssociados)
+        {
+            _logger.LogError("Não é possível deletar o plano com o id {0} porque há alunos associados.", id);
+            return false;
+        }
+
         _context.Planos.Remove(removePlano);
         await _context.SaveChangesAsync();
 
         return true;
-    }  
+    }
 }
