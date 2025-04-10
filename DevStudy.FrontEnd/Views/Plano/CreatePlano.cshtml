@@ -1,0 +1,62 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.PlanoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4 style="text-align: center;">Plano</h4>
+
+<form asp-action="CreatePlano" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() <!-- Token anti-forgery para proteção -->
+
+    <div class="form-group">
+        <label asp-for="Nome" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Preco" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Preco" type="number" class="form-control" />
+            <span asp-validation-for="Preco" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Descricao" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Descricao" class="form-control" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataInicio" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="DataInicio" class="form-control" />
+            <span asp-validation-for="DataInicio" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DataFim" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="DataFim" class="form-control" />
+            <span asp-validation-for="DataFim" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-info">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
