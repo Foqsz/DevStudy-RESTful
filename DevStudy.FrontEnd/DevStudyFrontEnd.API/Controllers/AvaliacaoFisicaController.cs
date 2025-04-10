@@ -38,5 +38,27 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.API.Controllers
             var avaliacaoCriada = await _avaliacaoFisicaService.CreateAvaliacaoFisica(avaliacaoFisica);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<ActionResult> DeleteAvaliacaoFisica(int id)
+        {
+            var avaliacao = await _avaliacaoFisicaService.GetAvaliacaoFisica(id);
+            if (avaliacao == null)
+            {
+                return NotFound();
+            }
+            return View(avaliacao);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteAvaliacaoFisica(int id, AvaliacaoFisicaViewModel avaliacaoFisica)
+        {
+            if (avaliacaoFisica == null)
+            {
+                return NotFound();
+            }
+            await _avaliacaoFisicaService.DeleteAvaliacaoFisica(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
