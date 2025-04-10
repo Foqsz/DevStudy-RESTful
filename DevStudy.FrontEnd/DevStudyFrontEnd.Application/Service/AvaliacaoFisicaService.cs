@@ -1,6 +1,7 @@
 ﻿using DevStudy.FrontEnd.DevStudyFrontEnd.Application.Interface;
 using DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models;
 using Newtonsoft.Json;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -137,16 +138,14 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
         {
             var client = _httpClient;
 
-            var response = await client.DeleteAsync($"{url}/{id}");
+            var response = await client.DeleteAsync($"{url}?id={id}");
 
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 return true;
             }
-            else
-            {
-                throw new HttpRequestException($"Erro ao deletar a avaliação física. {response.StatusCode}");
-            } 
+
+            return false;
         }
     }
 }
