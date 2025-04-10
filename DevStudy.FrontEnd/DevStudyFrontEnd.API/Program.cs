@@ -18,6 +18,7 @@ builder.Services.AddScoped<IExercicioService, ExerciciosService>();
 builder.Services.AddScoped<ITreinosService, TreinosService>();
 builder.Services.AddScoped<IProfessorService, ProfessorService>();
 builder.Services.AddScoped<IAvaliacaoFisicaService, AvaliacaoFisicaService>();
+builder.Services.AddScoped<IPlanoService, PlanoService>();
 
 var app = builder.Build();
 
