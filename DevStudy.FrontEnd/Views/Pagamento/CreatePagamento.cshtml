@@ -1,0 +1,71 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.PagamentoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4 style="text-align: center;">Plano</h4>
+
+<form asp-action="CreatePagamento" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() <!-- Token anti-forgery para proteção -->
+
+    <div class="form-group">
+        <label asp-for="AlunoId" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="AlunoId" class="form-control" />
+            <span asp-validation-for="AlunoId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Valor" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Valor" type="number" class="form-control" />
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataPagamento" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="DataPagamento" class="form-control" />
+            <span asp-validation-for="DataPagamento" class="text-danger"></span>
+        </div>
+    </div> 
+
+    <div class="form-group">
+        <label asp-for="DataVencimento" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="DataVencimento" class="form-control" />
+            <span asp-validation-for="DataVencimento" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FormaPagamento" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="FormaPagamento" class="form-control" />
+            <span asp-validation-for="FormaPagamento" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-info">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

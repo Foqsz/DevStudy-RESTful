@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.PagamentoViewModel>
+
+@{
+    ViewData["Title"] = "Painel Financeiro";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Painel Administrativo de Pagamentos</p>
+
+<p>
+    <a asp-controller="Pagamento" asp-action="CreatePagamento" class="btn btn-primary">Criar Novo Pagamento</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.First().Id)</th>
+                <th>@Html.DisplayNameFor(model => model.First().AlunoId)</th>
+                <th>@Html.DisplayNameFor(model => model.First().DataPagamento)</th>
+                <th>@Html.DisplayNameFor(model => model.First().DataVencimento)</th>
+                <th>@Html.DisplayNameFor(model => model.First().FormaPagamento)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Status)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AlunoId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataPagamento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataVencimento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FormaPagamento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td class="botoes">
+                        <a asp-controller="Pagamento" asp-action="UpdatePagamento" asp-route-id="@item.Id" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a asp-controller="Pagamento" asp-action="DeletePagamento" asp-route-id="@item.Id" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Nenhum pagamento encontrado.
+    </div>
+}

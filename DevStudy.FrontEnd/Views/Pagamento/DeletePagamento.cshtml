@@ -1,0 +1,52 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.PagamentoViewModel
+
+@{
+    ViewData["Title"] = "Concluir Pagamento";
+}
+
+<form asp-action="DeletePagamento" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() <!-- Token anti-forgery para proteção -->
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <p>Tem certeza de que deseja excluir o Pagamento do aluno id <strong>(ID: @Model.AlunoId)</strong>?</p>
+    </div> 
+
+    <!-- Exibir os dados sem permitir edição (usar campo hidden para enviar os dados corretamente) -->
+    <div class="form-group">
+        <label for="AlunoId">ID Do Aluno</label>
+        <input type="hidden" asp-for="AlunoId" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.AlunoId" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="DataPagamento">Data do Pagamento</label>
+        <input type="hidden" asp-for="DataPagamento" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.DataPagamento" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="DataVencimento">Data do Vencimento</label>
+        <input type="hidden" asp-for="DataVencimento" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.DataVencimento" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="FormaPagamento">Forma de Pagamento</label>
+        <input type="hidden" asp-for="FormaPagamento" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.FormaPagamento" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="Status">Status</label>
+        <input type="hidden" asp-for="Status" /> <!-- Usar campo hidden para garantir que o valor seja enviado -->
+        <input type="text" value="@Model.Status" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-info">Retornar</a>
+        </div>
+    </div>
+</form>

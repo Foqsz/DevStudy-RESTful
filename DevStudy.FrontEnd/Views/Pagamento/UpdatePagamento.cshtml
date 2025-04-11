@@ -1,0 +1,53 @@
+﻿@model DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models.PagamentoViewModel
+
+@{
+    ViewData["Title"] = "Atualizar Pagamento";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="form-group">
+    <p>Abaixo todas as informações editáveis pendentes do Aluno <b>@Model.AlunoId.</b></p>
+</div>
+
+<form asp-action="UpdatePagamento" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="AlunoId">AlunoId</label>
+        <input type="text" class="form-control" asp-for="AlunoId" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Valor">Valor do Pagamento</label>
+        <input type="text" class="form-control" value="@Model.Valor.ToString("F2")" name="Valor" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataPagamento">Data Pagamento</label>
+        <input type="text" class="form-control" asp-for="DataPagamento" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataVencimento">Data Vencimento</label>
+        <input type="text" class="form-control" asp-for="DataVencimento" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FormaPagamento">Forma de Pagamento</label>
+        <input type="text" class="form-control" asp-for="FormaPagamento" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status">Status do Pagamento</label>
+        <input type="text" class="form-control" asp-for="Status" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+    <a asp-action="Index" class="btn btn-info">Retornar</a>
+</form>
+
+<!-- Exibir mensagens de erro do ModelState -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        <strong>Erro!</strong> Por favor, corrija os erros abaixo.
+    </div>
+}
