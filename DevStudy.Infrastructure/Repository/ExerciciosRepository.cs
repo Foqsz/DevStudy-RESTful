@@ -24,7 +24,7 @@ public class ExerciciosRepository : IExerciciosRepository
 
     public async Task<IEnumerable<Exercicio>> GetExercicios()
     {
-       return await _context.Exercicios.ToListAsync();
+       return await _context.Exercicios.AsNoTracking().ToListAsync();
     }
 
     public async Task<Exercicio> GetExercicioById(int id)

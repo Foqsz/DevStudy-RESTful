@@ -24,7 +24,7 @@ public class PagamentoRepository : IPagamentoRepository
 
     public async Task<IEnumerable<Pagamento>> GetPagamentosAll()
     {
-        return await _dataBaseContext.Pagamentos.ToListAsync();
+        return await _dataBaseContext.Pagamentos.AsNoTracking().ToListAsync();
     }
 
     public async Task<Pagamento> GetDevedores(string status)

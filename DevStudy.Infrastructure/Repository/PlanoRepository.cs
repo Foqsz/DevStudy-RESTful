@@ -24,7 +24,7 @@ public class PlanoRepository : IPlanoRepository
 
     public async Task<IEnumerable<Plano>> GetPlanos()
     {
-        return await _context.Planos.ToListAsync();
+        return await _context.Planos.AsNoTracking().ToListAsync();
     }
 
     public async Task<Plano> GetPlano(int id)
