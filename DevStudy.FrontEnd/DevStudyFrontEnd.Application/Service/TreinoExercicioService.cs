@@ -30,12 +30,12 @@ public class TreinoExercicioService : ITreinoExercicioService
             var treinos = JsonConvert.DeserializeObject<IEnumerable<TreinoExercicioViewModel>>(content);
             if (treinos == null)
             {
-                throw new HttpRequestException("Erro ao desserializar a lista de treinos.");
+                return null;
             }
             return treinos;
         }
 
-        throw new HttpRequestException($"Erro ao buscar os treinos. {response.StatusCode}");
+        return null;
     }
 
     public async Task<TreinoExercicioViewModel> GetTreinoExercicioById(int id)

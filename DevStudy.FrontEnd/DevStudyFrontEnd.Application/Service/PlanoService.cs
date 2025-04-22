@@ -29,11 +29,11 @@ public class PlanoService : IPlanoService
             var planos = JsonConvert.DeserializeObject<IEnumerable<PlanoViewModel>>(content.Result);
             if (planos == null)
             {
-                throw new HttpRequestException("Erro ao desserializar a lista de planos.");
+                return null;
             }
             return planos;
         }
-        throw new HttpRequestException($"Erro ao buscar os planos. {response.StatusCode}");
+        return null;
     }
 
     public async Task<PlanoViewModel> GetPlano(int id)

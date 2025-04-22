@@ -29,13 +29,12 @@ public class ExerciciosService : IExercicioService
             var content = await response.Content.ReadAsStringAsync();
             var exercicios = JsonConvert.DeserializeObject<IEnumerable<ExercicioViewModel>>(content);
             if (exercicios == null)
-            {
-                throw new HttpRequestException("Erro ao desserializar a lista de exercicios.");
+            { 
+                return null;
             }
             return exercicios;
-        }
-
-        throw new HttpRequestException($"Erro ao buscar os exercicios. {response.StatusCode}");
+        } 
+        return null;
     }
 
     public async Task<ExercicioViewModel> GetExercicioById(int id)

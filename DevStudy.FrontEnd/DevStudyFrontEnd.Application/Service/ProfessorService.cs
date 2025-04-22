@@ -31,12 +31,12 @@ public class ProfessorService : IProfessorService
             var professores = JsonConvert.DeserializeObject<IEnumerable<InstrutorViewModel>>(content);
             if (professores == null)
             {
-                throw new HttpRequestException("Erro ao desserializar a lista de professores.");
+                return null;
             }
             return professores;
         }
 
-        throw new HttpRequestException($"Erro ao buscar os professores. {response.StatusCode}");
+        return null;
     }
 
     public async Task<InstrutorViewModel> GetProfessorById(int id)

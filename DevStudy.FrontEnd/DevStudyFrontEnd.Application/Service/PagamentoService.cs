@@ -39,8 +39,7 @@ public class PagamentoService : IPagamentoService
             return pagamentos ?? Enumerable.Empty<PagamentoViewModel>();
         }
 
-        // Outros erros (500, 403, etc)
-        throw new HttpRequestException($"Erro ao buscar os pagamentos. {response.StatusCode}");
+        return null;
     }
 
 

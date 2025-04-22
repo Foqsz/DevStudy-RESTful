@@ -32,11 +32,11 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
                 var avaliacoes = JsonConvert.DeserializeObject<IEnumerable<AvaliacaoFisicaViewModel>>(content);
                 if (avaliacoes == null)
                 {
-                    throw new HttpRequestException("Erro ao desserializar a lista de avaliações físicas.");
+                    return null; 
                 }
                 return avaliacoes;
             }
-            throw new HttpRequestException($"Erro ao buscar as avaliações físicas. {response.StatusCode}");
+            return null;
 
         }
 
@@ -57,7 +57,7 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
                 }
                 return avaliacoes;
             }
-            throw new HttpRequestException($"Erro ao buscar a avaliação física id={id}. {response.StatusCode}");
+           return null; 
         }
 
         public async Task<AvaliacaoFisicaViewModel> CreateAvaliacaoFisica(AvaliacaoFisicaViewModel avaliacaoFisica)
