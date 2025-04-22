@@ -2,7 +2,10 @@
 using DevStudy.Application.DTOs.Aluno;
 using DevStudy.Application.Interfaces;
 using DevStudy.Domain.Models;
-
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -113,6 +116,64 @@ public class AlunoController : ControllerBase
         {
             _logger.LogError(ex, "Erro ao tentar obter o aluno");
             return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter o aluno");
+        }
+    }
+
+    [HttpGet("treinos/imprimirTreino")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(Summary = "Gera um PDF com a lista de treinos dos alunos", Description = "Retorna um arquivo PDF contendo os nomes dos alunos e seus respectivos treinos.")]
+    public async Task<ActionResult> GerarTreinosPdf(int id)
+    {
+        try
+        {
+            var alunoComTreino = await _alunoService.GetAluno(id);  
+
+            if (alunoComTreino == null || alunoComTreino.Treinos == null || !alunoComTreino.Treinos.Any())
+            {
+                _logger.LogError("Aluno ou treinos não encontrados");
+                return NotFound("Aluno ou treinos não encontrados.");
+            }
+
+            using var stream = new MemoryStream();
+            var writer = new PdfWriter(stream);
+            var pdf = new PdfDocument(writer);
+            var document = new Document(pdf);
+
+            document.Add(new Paragraph($"Lista de Treinos do Aluno {alunoComTreino.Nome}")
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetFontSize(18)
+                .SetMarginBottom(20));
+
+            document.Add(new Paragraph($"Aluno: {alunoComTreino.Nome} ID:{alunoComTreino.Id}")
+                .SetFontSize(14));
+
+            document.Add(new Paragraph($"Professor: {alunoComTreino.Instrutor.Nome}")
+                .SetFontSize(14));
+
+            document.Add(new Paragraph($"Data: {DateTime.Now}")
+                .SetFontSize(14));
+
+            document.Add(new Paragraph("[VV GYM] - LISTA DE EXÉRCICIOS:")
+                .SetFontSize(14)
+                .SetMarginTop(10));
+
+            var lista = new List();
+            foreach (var exercicio in alunoComTreino.Treinos)
+            {
+                lista.Add(new ListItem($"{exercicio.Exercicio.Nome} - {exercicio.Series} séries de {exercicio.Repeticoes} repetições"));
+            }
+
+            document.Add(lista);
+            document.Close();
+
+            var bytes = stream.ToArray();
+            return File(bytes, "application/pdf", $"treinos-aluno-{alunoComTreino.Nome}.pdf");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao gerar PDF de treinos");
+            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao gerar PDF");
         }
     }
 
