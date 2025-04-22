@@ -14,68 +14,76 @@
     <a asp-controller="AvaliacaoFisica" asp-action="CreateAvaliacaoFisica" class="btn btn-primary">Registrar Nova Avaliação</a>
 </p>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AlunoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Altura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IMC)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PercentualGordura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClassificacaoIMC)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model != null && !Model.Any())
+{ 
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlunoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Peso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Altura)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IMC)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PercentualGordura)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClassificacaoIMC)
-                </td>
-                <td class="botoes">
-                    <a asp-controller="AvaliacaoFisica" asp-action="UpdateAvaliacao" asp-route-id="@item.Id" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> Editar
-                    </a>
-                    <a asp-controller="AvaliacaoFisica" asp-action="DeleteAvaliacaoFisica" asp-route-id="@item.Id" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i> Excluir
-                    </a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.AlunoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Peso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Altura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IMC)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PercentualGordura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClassificacaoIMC)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlunoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Peso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Altura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IMC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PercentualGordura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassificacaoIMC)
+                    </td>
+                    <td class="botoes">
+                        <a asp-controller="AvaliacaoFisica" asp-action="UpdateAvaliacao" asp-route-id="@item.Id" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a asp-controller="AvaliacaoFisica" asp-action="DeleteAvaliacaoFisica" asp-route-id="@item.Id" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Nenhuma avaliação física encontrada.
+    </div>
+}

@@ -14,70 +14,78 @@
     <a asp-controller="TreinoExercicio" asp-action="CreateTreinoExercicio" class="btn btn-primary">Registrar Novo Treino</a>
 </p>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TreinoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExercicioId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlunoId)
-            </th> 
-            <th>
-                Exercicio
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TreinoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExercicioId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlunoId)
-                </td>
-                <td>
-                    @if (item.Exercicio != null)
-                    {
-                        <ul>
-                            <li>
-                                <strong>Id:</strong> @item.Exercicio.Id <br />
-                                <strong>Nome:</strong> @item.Exercicio.Nome <br />
-                                <strong>Descrição:</strong> @item.Exercicio.Descricao <br />
-                                <strong>Tipo:</strong> @item.Exercicio.Tipo <br />
-                                <strong>Duração:</strong> @item.Exercicio.DuraçãoMinutos Minutos<br />
-                                <strong>Series:</strong> @item.Series <br />
-                                <strong>Repetições:</strong> @item.Repeticoes
-
-                            </li>
-                        </ul>
-                    }
-                </td>
-                <td class="botoes">
-                    <a asp-controller="TreinoExercicio" asp-action="UpdateTreinoExercicio" asp-route-id="@item.Id" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> Editar
-                    </a>
-                    <a asp-controller="TreinoExercicio" asp-action="DeleteTreinoExercicio" asp-route-id="@item.Id" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i> Excluir
-                    </a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TreinoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExercicioId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AlunoId)
+                </th> 
+                <th>
+                    Exercicio
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TreinoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExercicioId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlunoId)
+                    </td>
+                    <td>
+                        @if (item.Exercicio != null)
+                        {
+                            <ul>
+                                <li>
+                                    <strong>Id:</strong> @item.Exercicio.Id <br />
+                                    <strong>Nome:</strong> @item.Exercicio.Nome <br />
+                                    <strong>Descrição:</strong> @item.Exercicio.Descricao <br />
+                                    <strong>Tipo:</strong> @item.Exercicio.Tipo <br />
+                                    <strong>Duração:</strong> @item.Exercicio.DuraçãoMinutos Minutos<br />
+                                    <strong>Series:</strong> @item.Series <br />
+                                    <strong>Repetições:</strong> @item.Repeticoes
+
+                                </li>
+                            </ul>
+                        }
+                    </td>
+                    <td class="botoes">
+                        <a asp-controller="TreinoExercicio" asp-action="UpdateTreinoExercicio" asp-route-id="@item.Id" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a asp-controller="TreinoExercicio" asp-action="DeleteTreinoExercicio" asp-route-id="@item.Id" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Nenhuma treino encontrado.
+    </div>
+}
