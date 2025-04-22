@@ -26,6 +26,7 @@ public class TreinoExercicioRepository : ITreinoExercicioRepository
     {
         return await _context.TreinoExercicios
             .Include(te => te.Exercicio) // Carrega os detalhes do exercício
+            .AsNoTracking()
             .ToListAsync();
     }
 

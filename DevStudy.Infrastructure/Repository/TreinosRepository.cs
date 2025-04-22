@@ -32,6 +32,7 @@ namespace DevStudy.Infrastructure.Repository
                 .Include(t => t.Aluno)
                 .Include(t => t.Exercicios)
                     .ThenInclude(te => te.Exercicio) // Inclui os exercícios reais 
+                .AsNoTracking()
                 .ToListAsync();
         }
 

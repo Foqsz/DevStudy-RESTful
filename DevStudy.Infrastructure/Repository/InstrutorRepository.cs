@@ -30,7 +30,7 @@ public class InstrutorRepository : IInstrutorRepository
 
     public async Task<IEnumerable<Instrutor>> GetInstrutores()
     {
-        return await _context.Instrutores.Include(a => a.Alunos).ToListAsync();
+        return await _context.Instrutores.Include(a => a.Alunos).AsNoTracking().ToListAsync();
     }
 
     public async Task<Instrutor> GetInstrutor(int id)

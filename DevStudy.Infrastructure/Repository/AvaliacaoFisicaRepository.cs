@@ -25,7 +25,7 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
 
     public async Task<IEnumerable<AvaliacaoFisica>> GetAvaliacoesFisicas()
     {
-        return await _context.AvaliacoesFisicas.ToListAsync();
+        return await _context.AvaliacoesFisicas.AsNoTracking().ToListAsync();
 
         //var avaliacoesParaSomar = await _context.AvaliacoesFisicas.ToListAsync();
 
@@ -36,7 +36,7 @@ public class AvaliacaoFisicaRepository : IAvaliacaoFisicaRepository
 
     public async Task<AvaliacaoFisica> GetAvaliacaoFisica(int id)
     {
-        return await _context.AvaliacoesFisicas.SingleOrDefaultAsync(a => a.Id == id);
+        return await _context.AvaliacoesFisicas.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<AvaliacaoFisica> CreateAvaliacaoFisica(AvaliacaoFisica avaliacaoFisica)

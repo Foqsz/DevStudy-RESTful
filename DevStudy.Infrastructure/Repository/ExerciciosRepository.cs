@@ -29,7 +29,7 @@ public class ExerciciosRepository : IExerciciosRepository
 
     public async Task<Exercicio> GetExercicioById(int id)
     {
-        var exercicioId = await _context.Exercicios.SingleOrDefaultAsync(e => e.Id == id);
+        var exercicioId = await _context.Exercicios.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
 
         return exercicioId;
     }
@@ -63,7 +63,7 @@ public class ExerciciosRepository : IExerciciosRepository
     }
 
     public async Task<bool> DeleteExercicio(int id)
-    {
+    { 
         var exercicioExist = await _context.Exercicios.FindAsync(id);
 
         if (exercicioExist != null)
