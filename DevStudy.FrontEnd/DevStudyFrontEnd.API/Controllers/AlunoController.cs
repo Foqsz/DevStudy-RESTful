@@ -21,6 +21,27 @@ public class AlunoController : Controller
         return View(alunos);
     }
 
+    // GET: exibe o formulário
+    [HttpGet]
+    public IActionResult ImprimirTreino()
+    {
+        return View();
+    }
+
+    // POST: redireciona para a API que gera o PDF
+    [HttpPost]
+    public IActionResult ImprimirTreino(int id)
+    {
+        if (id <= 0)
+        {
+            TempData["Erro"] = "ID inválido. Tente novamente.";
+            return RedirectToAction("ImprimirTreino");
+        }
+
+        // redireciona pro endpoint real da API
+        return Redirect($"https://localhost:7238/api/Aluno/treinos/imprimirTreino?id={id}");
+    } 
+
     [HttpGet]  
     public async Task<ActionResult> CreateAluno()
     {

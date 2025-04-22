@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Imprimir Treino";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="ImprimirTreino" method="post">
+    <div class="form-group">
+        <label for="alunoId">Digite seu ID de Aluno:</label>
+        <input type="number" class="form-control" id="alunoId" name="id" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Imprimir PDF</button>
+</form>
+
+@if (TempData["Erro"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Erro"]</div>
+}
