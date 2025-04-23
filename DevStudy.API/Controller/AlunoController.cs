@@ -123,11 +123,11 @@ public class AlunoController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [SwaggerOperation(Summary = "Gera um PDF com a lista de treinos dos alunos", Description = "Retorna um arquivo PDF contendo os nomes dos alunos e seus respectivos treinos.")]
-    public async Task<ActionResult> GerarTreinosPdf(int id)
+    public async Task<ActionResult> GerarTreinosPdf(int idAluno)
     {
         try
         {
-            var alunoComTreino = await _alunoService.GetAluno(id);  
+            var alunoComTreino = await _alunoService.GetAluno(idAluno);  
 
             if (alunoComTreino == null || alunoComTreino.Treinos == null || !alunoComTreino.Treinos.Any())
             {
