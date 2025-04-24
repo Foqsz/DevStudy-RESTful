@@ -30,7 +30,7 @@ public class AlunoController : Controller
 
     // POST: redireciona para a API que gera o PDF
     [HttpPost]
-    public IActionResult ImprimirTreino(int id)
+    public async Task<IActionResult> ImprimirTreino(int id)
     {
         if (id <= 0)
         {
@@ -38,9 +38,26 @@ public class AlunoController : Controller
             return RedirectToAction("ImprimirTreino");
         }
 
-        // redireciona pro endpoint real da API
-        return Redirect($"https://localhost:7238/api/Aluno/treinos/imprimirTreino?id={id}");
-    } 
+        var url = $"https://localhost:7238/api/Aluno/treinos/imprimirTreino?idAluno={id}";  
+        using (var httpClient = new HttpClient())
+        {
+            var response = await httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode)  
+            {
+                TempData["Erro"] = $"Não foi localizado nenhum treino ou aluno com o ID={id} informado.";
+                return RedirectToAction("ImprimirTreino");
+            }
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            if (responseContent.Contains("Aluno ou treinos não encontrados."))
+            {
+                TempData["Erro"] = "Aluno ou treinos não encontrados. Tente novamente.";
+                return RedirectToAction("ImprimirTreino");
+            }
+        }
+
+        return Redirect(url);
+    }
 
     [HttpGet]  
     public async Task<ActionResult> CreateAluno()
