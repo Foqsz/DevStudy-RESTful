@@ -55,7 +55,7 @@ public class AlunoService : IAlunoService
             return aluno;
         }
 
-        throw new HttpRequestException($"Erro ao buscar o aluno. {response.StatusCode}");
+        return null;
     }
 
     public async Task<AlunoViewModel> GetAlunoByEmail(string email)
@@ -75,7 +75,7 @@ public class AlunoService : IAlunoService
             return aluno;
         }
 
-        throw new HttpRequestException($"Erro ao buscar o aluno. {response.StatusCode}");
+        return null;
     }
 
     public async Task<AlunoViewModel> AddAluno(AlunoViewModel aluno)
