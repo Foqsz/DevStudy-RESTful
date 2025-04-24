@@ -55,7 +55,7 @@ public class ProfessorService : IProfessorService
             }
             return professor;
         }
-        throw new HttpRequestException($"Erro ao buscar o professor. {response.StatusCode}");
+        return null;
     }
 
     public async Task<InstrutorViewModel> CreateProfessor(InstrutorViewModel professor)

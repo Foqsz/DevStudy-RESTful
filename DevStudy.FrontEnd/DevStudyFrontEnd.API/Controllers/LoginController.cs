@@ -30,7 +30,7 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.API.Controllers
             var instrutor = await _professorService.GetProfessorById(id);
             if (instrutor == null)
             {
-                ViewBag.Erro = "ID inválido.";
+                ViewBag.Erro = "Professor ID não localizado.";
                 return View();
             }
 
