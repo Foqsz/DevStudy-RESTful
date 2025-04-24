@@ -1,9 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "VV Gym";
+    ViewData["Title"] = "Login";
+    ViewData["OcultarNavbar"] = true;
 }
-
+ 
 <div class="text-center">
     <h1 class="display-4">VV Gym</h1>
     <p>Acompanhe meus projetos em <a href="https://github.com/Foqsz" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-    <img src="~/imagens/Captura de tela 2025-03-27 110132.png" alt="VV Gym Logo" />
+    <img src="~/imagens/Captura de tela 2025-03-27 110132.png" alt="VV Gym Logo" style="width: 20%;"/>
+</div>
+
+<div class="text-center">
+<h2 style="font-size: 50px;">Você é:</h2>
+<a asp-controller="Login" asp-action="LoginInstrutor" style="font-size: 30px; text-decoration: none; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='#007bff';" onmouseout="this.style.transform='scale(1)'; this.style.color='inherit';">Instrutor</a>
+<br />
+<a asp-controller="Login" asp-action="LoginAluno" style="font-size: 30px; text-decoration: none; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='#007bff';" onmouseout="this.style.transform='scale(1)'; this.style.color='inherit';">Aluno</a>
 </div>
