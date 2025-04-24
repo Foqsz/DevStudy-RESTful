@@ -1,5 +1,6 @@
 ﻿using DevStudy.FrontEnd.DevStudyFrontEnd.Application.Interface;
 using DevStudy.FrontEnd.DevStudyFrontEnd.Core.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -58,6 +59,14 @@ public class AlunoController : Controller
 
         return Redirect(url);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> EncerrarLogin()
+    {  
+        // Redireciona para a página inicial
+        return RedirectToAction("Index", "Home");
+    }
+
 
     [HttpGet]  
     public async Task<ActionResult> CreateAluno()

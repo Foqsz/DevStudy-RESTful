@@ -8,5 +8,11 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.API.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<ActionResult> EncerrarLogin()
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
