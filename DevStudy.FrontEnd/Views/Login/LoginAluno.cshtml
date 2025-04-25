@@ -5,12 +5,12 @@
 
 
 <div class="text-center">
-<h2>Login de Aluno</h2>
-<form asp-action="LoginAluno" method="post">
-    <label for="id">ID do Aluno:</label>
-    <input type="number" name="id" required />
-    <button type="submit" class="btn btn-info">Entrar</button>
-</form>
+    <h2>Login de Aluno</h2>
+    <form asp-action="LoginAluno" method="post">
+        <label for="id">ID do Aluno:</label>
+        <input type="number" name="id" required style="display: block; margin: 0 auto;" />
+        <button type="submit" class="btn btn-info" style="margin-top: 10px;">Entrar</button>
+    </form>
 </div>
 
 <form asp-action="EncerrarLogin" method="post"
