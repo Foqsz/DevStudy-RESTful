@@ -24,7 +24,7 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.API.Controllers
         [HttpGet]
         public async Task<ActionResult> CreateAvaliacaoFisica()
         {
-            ViewBag.Id = new SelectList(await _avaliacaoFisicaService.GetAvaliacoesFisicas());
+            //ViewBag.Id = new SelectList(await _avaliacaoFisicaService.GetAvaliacoesFisicas());
             return View();
         }
 
