@@ -53,7 +53,7 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
                 var avaliacoes = JsonConvert.DeserializeObject<AvaliacaoFisicaViewModel>(content);
                 if (avaliacoes == null)
                 {
-                    throw new HttpRequestException($"Erro ao desserializar a avaliação física id={id}.");
+                    return null;
                 }
                 return avaliacoes;
             }
@@ -64,22 +64,11 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
         {
             var client = _httpClient;
 
-            Console.WriteLine("=== INÍCIO DO PROCESSO DE ENVIO DA AVALIAÇÃO FÍSICA ===");
-            Console.WriteLine("Dados do objeto antes da serialização:");
-            Console.WriteLine($"Id: {avaliacaoFisica.Id}");
-            Console.WriteLine($"AlunoId: {avaliacaoFisica.AlunoId}");
-            Console.WriteLine($"Data: {avaliacaoFisica.Data}");
-            Console.WriteLine($"Peso: {avaliacaoFisica.Peso}");
-            Console.WriteLine($"Altura: {avaliacaoFisica.Altura}");
-
             // Ensure decimal values are correctly formatted for JSON serialization
             var jsonContent = JsonConvert.SerializeObject(avaliacaoFisica, new JsonSerializerSettings
             {
                 Culture = System.Globalization.CultureInfo.InvariantCulture
             });
-
-            Console.WriteLine("JSON enviado:");
-            Console.WriteLine(jsonContent);
 
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
@@ -91,28 +80,16 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                Console.WriteLine("JSON recebido:");
-                Console.WriteLine(responseContent);
-
                 var avaliacao = JsonConvert.DeserializeObject<AvaliacaoFisicaViewModel>(responseContent);
                 if (avaliacao == null)
                 {
-                    throw new HttpRequestException("Erro ao desserializar a avaliação física.");
+                    return null;
                 }
-
-                Console.WriteLine("Dados Recebidos após desserialização:");
-                Console.WriteLine($"Id: {avaliacao.Id}");
-                Console.WriteLine($"AlunoId: {avaliacao.AlunoId}");
-                Console.WriteLine($"Data: {avaliacao.Data}");
-                Console.WriteLine($"Peso: {avaliacao.Peso}");
-                Console.WriteLine($"Altura: {avaliacao.Altura}");
-
-                Console.WriteLine("=== FIM DO PROCESSO ===");
 
                 return avaliacao;
             }
 
-            throw new HttpRequestException($"Erro ao criar a avaliação física. {response.StatusCode}");
+            return null;
         }
 
 
@@ -127,11 +104,11 @@ namespace DevStudy.FrontEnd.DevStudyFrontEnd.Application.Service
                 var avaliacao = JsonConvert.DeserializeObject<AvaliacaoFisicaViewModel>(content);
                 if (avaliacao == null)
                 {
-                    throw new HttpRequestException("Erro ao desserializar a avaliação física.");
+                    return null;
                 }
                 return avaliacao;
             }
-            throw new HttpRequestException($"Erro ao atualizar a avaliação física. {response.StatusCode}");
+            return null;
         }
 
         public async Task<bool> DeleteAvaliacaoFisica(int id)
