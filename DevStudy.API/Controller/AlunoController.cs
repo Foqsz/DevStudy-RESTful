@@ -78,15 +78,14 @@ public class AlunoController : ControllerBase
             var alunoId = await _alunoService.GetAluno(id);
             if (alunoId == null)
             {
-                _logger.LogError("Aluno não encontrado");
-                return NotFound();
-            }
+                throw new GymExceptions("O aluno solicitado não foi encontrado.");
+            } 
             return Ok(alunoId);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Erro ao tentar obter o aluno");
-            return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao tentar obter o aluno");
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
         }
     }
 

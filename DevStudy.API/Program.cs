@@ -40,6 +40,11 @@ builder.Services.AddSwaggerGen(doc =>
     doc.EnableAnnotations();
 });
 
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(typeof(ExceptionFilters));
+});
+
 // Configuração da conexão com o banco de dados
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataBaseContext>(options =>
